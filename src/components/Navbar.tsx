@@ -21,16 +21,16 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-seafoam/80 bg-cream/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5">
           <Link href="/" className="shrink-0">
-            <span className="block font-display text-2xl font-semibold tracking-wide text-ink sm:text-3xl">
+            <span className="block font-display text-xl font-semibold tracking-wide text-ink sm:text-3xl">
               Soul <span className="text-brand">Stack</span> Studio
             </span>
-            <span className="mt-0.5 block text-[9px] uppercase tracking-[0.45em] text-ink/50 sm:text-[10px]">
+            <span className="mt-0.5 block text-[8px] uppercase tracking-[0.35em] text-ink/50 sm:text-[10px] sm:tracking-[0.45em]">
               Photography
             </span>
           </Link>
-          <nav className="flex items-center gap-6 sm:gap-8">
+          <nav className="flex items-center gap-4 sm:gap-8">
             <Link href="/" className={linkClass("/")}>
               Home
             </Link>
@@ -52,7 +52,7 @@ export default function Navbar() {
             </button>
             {isAdmin ? (
               <div className="flex items-center gap-3">
-                <span className="rounded-full bg-seafoam px-3 py-1 text-xs font-medium text-brand-deep">
+                <span className="hidden rounded-full bg-seafoam px-3 py-1 text-xs font-medium text-brand-deep sm:inline-block">
                   Admin mode
                 </span>
                 <button

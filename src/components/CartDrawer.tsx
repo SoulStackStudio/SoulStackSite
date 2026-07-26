@@ -39,7 +39,7 @@ export default function CartDrawer() {
   return (
     <div className="fixed inset-0 z-50 flex justify-end bg-ink/40 backdrop-blur-sm" onClick={() => setOpen(false)}>
       <div
-        className="flex h-full w-full max-w-md flex-col bg-cream shadow-2xl"
+        className="flex h-dvh w-full max-w-md flex-col bg-cream shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-seafoam px-6 py-5">
@@ -71,28 +71,28 @@ export default function CartDrawer() {
                     </div>
                     <button
                       onClick={() => remove(i.printId, i.sizeLabel)}
-                      className="text-ink/30 hover:text-red-500"
+                      className="p-1.5 text-ink/30 hover:text-red-500"
                       aria-label={`Remove ${i.title}`}
                     >
-                      <Trash2 size={15} />
+                      <Trash2 size={16} />
                     </button>
                   </div>
                   <div className="mt-auto flex items-center justify-between pt-2">
                     <div className="flex items-center gap-2 rounded-full border border-seafoam bg-mist px-2 py-0.5">
                       <button
                         onClick={() => setQty(i.printId, i.sizeLabel, i.qty - 1)}
-                        className="p-1 text-ink/50 hover:text-brand"
+                        className="p-2 text-ink/50 hover:text-brand"
                         aria-label="Decrease quantity"
                       >
-                        <Minus size={13} />
+                        <Minus size={14} />
                       </button>
                       <span className="w-5 text-center text-sm text-ink">{i.qty}</span>
                       <button
                         onClick={() => setQty(i.printId, i.sizeLabel, i.qty + 1)}
-                        className="p-1 text-ink/50 hover:text-brand"
+                        className="p-2 text-ink/50 hover:text-brand"
                         aria-label="Increase quantity"
                       >
-                        <Plus size={13} />
+                        <Plus size={14} />
                       </button>
                     </div>
                     <p className="text-sm font-medium text-ink">
@@ -105,7 +105,7 @@ export default function CartDrawer() {
           </div>
         )}
 
-        <div className="border-t border-seafoam px-6 py-5">
+        <div className="border-t border-seafoam px-6 pt-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
           <div className="mb-4 flex items-center justify-between">
             <p className="text-sm uppercase tracking-widest text-ink/50">Total</p>
             <p className="font-display text-2xl font-semibold text-ink">{formatPrice(totalCents)}</p>

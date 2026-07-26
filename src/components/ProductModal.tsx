@@ -43,11 +43,11 @@ export default function ProductModal({ print, onClose }: Props) {
           <img
             src={print.image}
             alt={print.title}
-            className="h-64 w-full object-cover md:h-full md:min-h-[480px]"
+            className="h-52 w-full object-cover sm:h-64 md:h-full md:min-h-[480px]"
           />
         </div>
 
-        <div className="relative flex flex-col p-8 md:p-10">
+        <div className="relative flex flex-col p-6 sm:p-8 md:p-10">
           <button
             onClick={onClose}
             className="absolute right-4 top-4 text-ink/35 hover:text-ink"
@@ -80,7 +80,7 @@ export default function ProductModal({ print, onClose }: Props) {
             </div>
           </div>
 
-          <div className="mt-auto pt-10">
+          <div className="mt-auto pt-8 sm:pt-10">
             <button
               onClick={addToCart}
               disabled={!selected}

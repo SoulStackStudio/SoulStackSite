@@ -17,11 +17,25 @@
   --color-aqua: #6daae3; /* Greek Sea — bright accents */
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* iOS Safari force-zooms the page when focusing any input under 16px.
+   Keep all form fields at 16px on phones so the site never zooms. */
+@media (max-width: 640px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
 }
 
 h1,
