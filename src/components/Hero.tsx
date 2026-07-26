@@ -1,26 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ImageIcon, X } from "lucide-react";
-import type { SiteContent } from "@/lib/types";
+import { Images } from "lucide-react";
+import type { SiteContent, HeroImage } from "@/lib/types";
 import { useAdmin } from "./AdminProvider";
 import EditableText from "./EditableText";
-import ImagePicker from "./ImagePicker";
+import HeroImageManager, { heroImageStyle } from "./HeroImageManager";
+
+// Shown only until the owner saves her own slideshow — she can replace these
+// in admin mode (Hero images panel) whenever she likes.
+const SAMPLE_SLIDES: HeroImage[] = [
+  {
+    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop",
+    posX: 50,
+    posY: 55,
+    zoom: 1,
+  },
+  {
+    url: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2000&auto=format&fit=crop",
+    posX: 50,
+    posY: 40,
+    zoom: 1,
+  },
+];
+
+function resolveHeroImages(content: SiteContent): HeroImage[] {
+  if (content.hero.images && content.hero.images.length > 0) return content.hero.images;
+  // Legacy content: keep her single chosen image first, demo the slide
+  // mechanic with sample shots until she saves her own set.
+  const own = content.hero.image
+    ? [{ url: content.hero.image, posX: 50, posY: 50, zoom: 1 }]
+    : [];
+  return [...own, ...SAMPLE_SLIDES.filter((s) => s.url !== content.hero.image)];
+}
+
+const SLIDE_MS = 6000;
 
 export default function Hero({ content }: { content: SiteContent }) {
   const { isAdmin, updateContent } = useAdmin();
-  const [imagePanel, setImagePanel] = useState(false);
-  const [imageDraft, setImageDraft] = useState(content.hero.image);
+  const [managerOpen, setManagerOpen] = useState(false);
+  const [index, setIndex] = useState(0);
+
+  const images = resolveHeroImages(content);
+  const current = Math.min(index, images.length - 1);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % images.length), SLIDE_MS);
+    return () => clearInterval(t);
+  }, [images.length]);
 
   return (
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={content.hero.image}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      {images.map((img, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={`${img.url}-${i}`}
+          src={img.url}
+          alt=""
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out ${
+            i === current ? "opacity-100" : "opacity-0"
+          }`}
+          style={heroImageStyle(img)}
+        />
+      ))}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/60" />
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 py-24 text-center text-cream">
@@ -45,39 +89,31 @@ export default function Hero({ content }: { content: SiteContent }) {
         </Link>
       </div>
 
+      {images.length > 1 && (
+        <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              aria-label={`Show slide ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                i === current ? "w-6 bg-cream/90" : "w-1.5 bg-cream/45 hover:bg-cream/70"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+
       {isAdmin && (
         <div className="absolute bottom-4 right-4 z-20">
-          {imagePanel ? (
-            <div className="w-80 rounded-xl bg-cream p-4 shadow-2xl">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="text-sm font-medium text-ink">Hero image</p>
-                <button onClick={() => setImagePanel(false)} className="text-ink/40 hover:text-ink">
-                  <X size={16} />
-                </button>
-              </div>
-              <ImagePicker value={imageDraft} onChange={setImageDraft} />
-              <button
-                onClick={async () => {
-                  const err = await updateContent((c) => ({
-                    ...c,
-                    hero: { ...c.hero, image: imageDraft },
-                  }));
-                  if (!err) setImagePanel(false);
-                }}
-                className="mt-3 w-full rounded-lg bg-brand py-2 text-sm font-medium text-cream hover:bg-brand-deep"
-              >
-                Save image
-              </button>
-            </div>
+          {managerOpen ? (
+            <HeroImageManager images={images} onClose={() => setManagerOpen(false)} />
           ) : (
             <button
-              onClick={() => {
-                setImageDraft(content.hero.image);
-                setImagePanel(true);
-              }}
+              onClick={() => setManagerOpen(true)}
               className="flex items-center gap-2 rounded-full bg-cream/90 px-4 py-2 text-sm font-medium text-brand shadow-lg transition hover:bg-cream"
             >
-              <ImageIcon size={15} /> Change image
+              <Images size={15} /> Hero images
             </button>
           )}
         </div>

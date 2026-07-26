@@ -13,6 +13,26 @@ export const defaultContent: SiteContent = {
       "Fine-art photographic prints from Soul Stack Studio — luminous, considered, and printed to gallery standard.",
     image:
       "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=2000&auto=format&fit=crop",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=2000&auto=format&fit=crop",
+        posX: 50,
+        posY: 50,
+        zoom: 1,
+      },
+      {
+        url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop",
+        posX: 50,
+        posY: 55,
+        zoom: 1,
+      },
+      {
+        url: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2000&auto=format&fit=crop",
+        posX: 50,
+        posY: 40,
+        zoom: 1,
+      },
+    ],
   },
   about: {
     heading: "Behind the Lens",
