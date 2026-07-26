@@ -28,7 +28,7 @@ export default function AdminLoginModal() {
       onClick={closeLogin}
     >
       <div
-        className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-2xl"
+        className="w-full max-w-sm rounded-2xl bg-cream p-8 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
@@ -53,7 +53,7 @@ export default function AdminLoginModal() {
           <button
             type="submit"
             disabled={busy || !password}
-            className="w-full rounded-lg bg-brand py-2.5 font-medium text-white transition hover:bg-brand-deep disabled:opacity-50"
+            className="w-full rounded-lg bg-brand py-2.5 font-medium text-cream transition hover:bg-brand-deep disabled:opacity-50"
           >
             {busy ? "Checking…" : "Unlock"}
           </button>

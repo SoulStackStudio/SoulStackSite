@@ -6,10 +6,11 @@
 }
 
 @theme {
-  /* Soul Stack Studio — oceanic palette */
+  /* Soul Stack Studio — oceanic palette on warm sand */
   --color-ink: #17313a; /* deep sea slate for text */
-  --color-mist: #f7fbfa; /* near-white section background */
-  --color-seafoam: #e4f3f0; /* soft aqua tint */
+  --color-cream: #faf5e9; /* warm sandy cream — replaces white everywhere */
+  --color-mist: #f3ecda; /* deeper sand for tinted sections */
+  --color-seafoam: #e2e9d9; /* sun-bleached seagrass tint */
   --color-brand: #0f766e; /* deep teal */
   --color-brand-deep: #0b5a54;
   --color-turquoise: #14b8a6;
@@ -17,7 +18,7 @@
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -32,5 +33,5 @@ h3,
 
 ::selection {
   background: var(--color-aqua);
-  color: #ffffff;
+  color: var(--color-cream);
 }

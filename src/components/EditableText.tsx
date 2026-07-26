@@ -39,7 +39,7 @@ export default function EditableText({ value, onSave, multiline, className, as: 
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             rows={Math.max(3, draft.split("\n").length + 1)}
-            className={`w-full rounded-lg border-2 border-turquoise bg-white/95 p-2 text-ink outline-none ${className ?? ""}`}
+            className={`w-full rounded-lg border-2 border-turquoise bg-cream/95 p-2 text-ink outline-none ${className ?? ""}`}
           />
         ) : (
           <input
@@ -47,14 +47,14 @@ export default function EditableText({ value, onSave, multiline, className, as: 
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && save()}
-            className={`w-full rounded-lg border-2 border-turquoise bg-white/95 p-2 text-ink outline-none ${className ?? ""}`}
+            className={`w-full rounded-lg border-2 border-turquoise bg-cream/95 p-2 text-ink outline-none ${className ?? ""}`}
           />
         )}
         <div className="mt-2 flex items-center gap-2">
           <button
             onClick={save}
             disabled={saving}
-            className="flex items-center gap-1 rounded-md bg-brand px-3 py-1 text-xs font-medium text-white hover:bg-brand-deep disabled:opacity-50"
+            className="flex items-center gap-1 rounded-md bg-brand px-3 py-1 text-xs font-medium text-cream hover:bg-brand-deep disabled:opacity-50"
           >
             <Check size={13} /> {saving ? "Saving…" : "Save"}
           </button>
@@ -82,7 +82,7 @@ export default function EditableText({ value, onSave, multiline, className, as: 
           setDraft(value);
           setEditing(true);
         }}
-        className="absolute -right-2 -top-2 rounded-full bg-turquoise p-1.5 text-white opacity-0 shadow-md transition group-hover/edit:opacity-100"
+        className="absolute -right-2 -top-2 rounded-full bg-turquoise p-1.5 text-cream opacity-0 shadow-md transition group-hover/edit:opacity-100"
         title="Edit text"
         aria-label="Edit text"
       >

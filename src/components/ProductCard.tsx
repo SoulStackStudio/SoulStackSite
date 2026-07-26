@@ -35,7 +35,7 @@ export default function ProductCard({ print, onOpen, manage, onEdit, onDelete, o
       </button>
 
       {manage && (
-        <div className="absolute right-2 top-2 flex gap-1.5 rounded-full bg-white/95 p-1.5 shadow-md">
+        <div className="absolute right-2 top-2 flex gap-1.5 rounded-full bg-cream/95 p-1.5 shadow-md">
           {print.featured && <Star size={15} className="mt-[3px] fill-aqua text-aqua" />}
           <button
             onClick={() => onMove?.(-1)}

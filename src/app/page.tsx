@@ -28,7 +28,7 @@ export default async function HomePage() {
         <div className="mt-14 text-center">
           <Link
             href="/shop"
-            className="inline-block rounded-full border border-brand px-8 py-3 text-sm font-medium tracking-widest uppercase text-brand transition hover:bg-brand hover:text-white"
+            className="inline-block rounded-full border border-brand px-8 py-3 text-sm font-medium tracking-widest uppercase text-brand transition hover:bg-brand hover:text-cream"
           >
             View All Prints
           </Link>

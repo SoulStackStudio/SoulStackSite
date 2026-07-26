@@ -94,7 +94,7 @@ export default function PrintEditModal({ print, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-7 shadow-2xl"
+        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-cream p-7 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-5 flex items-center justify-between">
@@ -190,7 +190,7 @@ export default function PrintEditModal({ print, onClose }: Props) {
           <button
             onClick={save}
             disabled={saving}
-            className="w-full rounded-lg bg-brand py-2.5 text-sm font-medium text-white transition hover:bg-brand-deep disabled:opacity-50"
+            className="w-full rounded-lg bg-brand py-2.5 text-sm font-medium text-cream transition hover:bg-brand-deep disabled:opacity-50"
           >
             {saving ? "Saving…" : print ? "Save changes" : "Add print"}
           </button>

@@ -18,7 +18,7 @@ export default function SuccessPage() {
         </p>
         <Link
           href="/shop"
-          className="mt-10 inline-block rounded-full border border-brand px-8 py-3 text-sm font-medium tracking-widest uppercase text-brand transition hover:bg-brand hover:text-white"
+          className="mt-10 inline-block rounded-full border border-brand px-8 py-3 text-sm font-medium tracking-widest uppercase text-brand transition hover:bg-brand hover:text-cream"
         >
           Continue Browsing
         </Link>

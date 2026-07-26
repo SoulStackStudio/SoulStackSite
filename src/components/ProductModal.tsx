@@ -41,7 +41,7 @@ export default function ProductModal({ print, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="grid max-h-[90vh] w-full max-w-4xl grid-cols-1 overflow-y-auto rounded-2xl bg-white shadow-2xl md:grid-cols-2"
+        className="grid max-h-[90vh] w-full max-w-4xl grid-cols-1 overflow-y-auto rounded-2xl bg-cream shadow-2xl md:grid-cols-2"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="bg-seafoam">
@@ -76,7 +76,7 @@ export default function ProductModal({ print, onClose }: Props) {
                   onClick={() => setSizeLabel(s.label)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     s.label === sizeLabel
-                      ? "border-brand bg-brand text-white"
+                      ? "border-brand bg-brand text-cream"
                       : "border-seafoam bg-mist text-ink/70 hover:border-turquoise"
                   }`}
                 >
@@ -90,7 +90,7 @@ export default function ProductModal({ print, onClose }: Props) {
             <button
               onClick={buy}
               disabled={busy || !selected}
-              className="flex w-full items-center justify-center gap-2 rounded-full bg-brand py-3.5 text-sm font-medium tracking-widest uppercase text-white transition hover:bg-brand-deep disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-brand py-3.5 text-sm font-medium tracking-widest uppercase text-cream transition hover:bg-brand-deep disabled:opacity-60"
             >
               {busy ? (
                 <>
