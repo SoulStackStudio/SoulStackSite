@@ -19,6 +19,12 @@ export interface CartItem {
   qty: number;
 }
 
+export interface CartToastData {
+  id: number;
+  title: string;
+  sizeLabel: string;
+}
+
 interface CartContextValue {
   items: CartItem[];
   count: number;
@@ -29,6 +35,8 @@ interface CartContextValue {
   setQty: (printId: string, sizeLabel: string, qty: number) => void;
   remove: (printId: string, sizeLabel: string) => void;
   clear: () => void;
+  toast: CartToastData | null;
+  dismissToast: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -44,7 +52,9 @@ const STORAGE_KEY = "sss_cart";
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setOpen] = useState(false);
+  const [toast, setToast] = useState<CartToastData | null>(null);
   const loaded = useRef(false);
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // survives navigation within the tab, resets when the tab closes
   useEffect(() => {
@@ -78,7 +88,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...item, qty: 1 }];
     });
-    setOpen(true);
+    // brief confirmation toast instead of yanking the visitor into the cart
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast({ id: Date.now(), title: item.title, sizeLabel: item.sizeLabel });
+    toastTimer.current = setTimeout(() => setToast(null), 2600);
+  };
+
+  const dismissToast = () => {
+    if (toastTimer.current) clearTimeout(toastTimer.current);
+    setToast(null);
   };
 
   const setQty = (printId: string, sizeLabel: string, qty: number) => {
@@ -111,7 +129,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ items, count, totalCents, isOpen, setOpen, add, setQty, remove, clear }}
+      value={{ items, count, totalCents, isOpen, setOpen, add, setQty, remove, clear, toast, dismissToast }}
     >
       {children}
     </CartContext.Provider>

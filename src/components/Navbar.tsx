@@ -7,6 +7,7 @@ import { useAdmin } from "./AdminProvider";
 import { useCart } from "./CartProvider";
 import AdminLoginModal from "./AdminLoginModal";
 import CartDrawer from "./CartDrawer";
+import CartToast from "./CartToast";
 
 export default function Navbar() {
   const { isAdmin, openLogin, logout } = useAdmin();
@@ -45,7 +46,10 @@ export default function Navbar() {
             >
               <ShoppingBag size={19} />
               {count > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-semibold text-cream">
+                <span
+                  key={count}
+                  className="badge-pop absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-semibold text-cream"
+                >
                   {count}
                 </span>
               )}
@@ -79,6 +83,7 @@ export default function Navbar() {
       </header>
       <AdminLoginModal />
       <CartDrawer />
+      <CartToast />
     </>
   );
 }
