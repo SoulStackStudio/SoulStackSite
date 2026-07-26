@@ -99,8 +99,13 @@ export default function ContactSection({ content }: { content: SiteContent }) {
         <EditableText
           as="h1"
           value={contact.heading}
-          onSave={(v) =>
-            updateContent((c) => ({ ...c, contact: { ...resolveContact(c), heading: v } }))
+          textStyle={content.styles?.["contact.heading"]}
+          onSave={(v, st) =>
+            updateContent((c) => ({
+              ...c,
+              contact: { ...resolveContact(c), heading: v },
+              styles: { ...(c.styles ?? {}), "contact.heading": st },
+            }))
           }
           className="font-display text-4xl font-semibold text-ink sm:text-5xl"
         />
@@ -108,8 +113,13 @@ export default function ContactSection({ content }: { content: SiteContent }) {
           as="p"
           multiline
           value={contact.subtext}
-          onSave={(v) =>
-            updateContent((c) => ({ ...c, contact: { ...resolveContact(c), subtext: v } }))
+          textStyle={content.styles?.["contact.subtext"]}
+          onSave={(v, st) =>
+            updateContent((c) => ({
+              ...c,
+              contact: { ...resolveContact(c), subtext: v },
+              styles: { ...(c.styles ?? {}), "contact.subtext": st },
+            }))
           }
           className="mx-auto mt-4 max-w-xl text-base text-ink/60"
         />

@@ -26,6 +26,12 @@ export interface ContactItem {
   value: string;
 }
 
+export interface TextStyle {
+  /** font size as % of the design default (100 = unchanged) */
+  size?: number;
+  align?: "left" | "center" | "right";
+}
+
 export interface SiteContent {
   hero: {
     headline: string;
@@ -48,7 +54,16 @@ export interface SiteContent {
     subtext: string;
     items: ContactItem[];
   };
+  /** per-text-box style overrides, keyed by field id (e.g. "hero.headline") */
+  styles?: Record<string, TextStyle>;
   prints: Print[];
+}
+
+export function textStyleCss(style?: TextStyle): React.CSSProperties {
+  return {
+    ...(style?.size && style.size !== 100 ? { fontSize: `${style.size}%` } : {}),
+    ...(style?.align ? { textAlign: style.align } : {}),
+  };
 }
 
 export function formatPrice(cents: number): string {

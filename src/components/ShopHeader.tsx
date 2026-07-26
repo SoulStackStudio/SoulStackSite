@@ -13,14 +13,28 @@ export default function ShopHeader({ content }: { content: SiteContent }) {
       <EditableText
         as="h1"
         value={content.shop.heading}
-        onSave={(v) => updateContent((c) => ({ ...c, shop: { ...c.shop, heading: v } }))}
+        textStyle={content.styles?.["shop.heading"]}
+        onSave={(v, st) =>
+          updateContent((c) => ({
+            ...c,
+            shop: { ...c.shop, heading: v },
+            styles: { ...(c.styles ?? {}), "shop.heading": st },
+          }))
+        }
         className="font-display text-4xl font-semibold text-ink sm:text-5xl"
       />
       <EditableText
         as="p"
         multiline
         value={content.shop.subtext}
-        onSave={(v) => updateContent((c) => ({ ...c, shop: { ...c.shop, subtext: v } }))}
+        textStyle={content.styles?.["shop.subtext"]}
+        onSave={(v, st) =>
+          updateContent((c) => ({
+            ...c,
+            shop: { ...c.shop, subtext: v },
+            styles: { ...(c.styles ?? {}), "shop.subtext": st },
+          }))
+        }
         className="mt-4 text-base text-ink/60"
       />
     </div>

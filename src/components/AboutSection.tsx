@@ -14,14 +14,28 @@ export default function AboutSection({ content }: { content: SiteContent }) {
         <EditableText
           as="h2"
           value={content.about.heading}
-          onSave={(v) => updateContent((c) => ({ ...c, about: { ...c.about, heading: v } }))}
+          textStyle={content.styles?.["about.heading"]}
+          onSave={(v, st) =>
+            updateContent((c) => ({
+              ...c,
+              about: { ...c.about, heading: v },
+              styles: { ...(c.styles ?? {}), "about.heading": st },
+            }))
+          }
           className="font-display text-3xl font-semibold text-ink sm:text-4xl"
         />
         <EditableText
           as="p"
           multiline
           value={content.about.body}
-          onSave={(v) => updateContent((c) => ({ ...c, about: { ...c.about, body: v } }))}
+          textStyle={content.styles?.["about.body"]}
+          onSave={(v, st) =>
+            updateContent((c) => ({
+              ...c,
+              about: { ...c.about, body: v },
+              styles: { ...(c.styles ?? {}), "about.body": st },
+            }))
+          }
           className="mt-6 text-base leading-relaxed text-ink/70 sm:text-lg"
         />
       </div>

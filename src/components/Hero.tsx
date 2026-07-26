@@ -71,14 +71,28 @@ export default function Hero({ content }: { content: SiteContent }) {
         <EditableText
           as="h1"
           value={content.hero.headline}
-          onSave={(v) => updateContent((c) => ({ ...c, hero: { ...c.hero, headline: v } }))}
+          textStyle={content.styles?.["hero.headline"]}
+          onSave={(v, st) =>
+            updateContent((c) => ({
+              ...c,
+              hero: { ...c.hero, headline: v },
+              styles: { ...(c.styles ?? {}), "hero.headline": st },
+            }))
+          }
           className="font-display text-4xl font-semibold leading-tight sm:text-6xl"
         />
         <EditableText
           as="p"
           multiline
           value={content.hero.subtext}
-          onSave={(v) => updateContent((c) => ({ ...c, hero: { ...c.hero, subtext: v } }))}
+          textStyle={content.styles?.["hero.subtext"]}
+          onSave={(v, st) =>
+            updateContent((c) => ({
+              ...c,
+              hero: { ...c.hero, subtext: v },
+              styles: { ...(c.styles ?? {}), "hero.subtext": st },
+            }))
+          }
           className="mx-auto mt-6 max-w-xl text-base text-cream/85 sm:text-lg"
         />
         <Link
