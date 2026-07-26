@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   Mail,
-  Instagram,
+  AtSign,
   Phone,
   MapPin,
   Globe,
@@ -37,7 +37,7 @@ export function resolveContact(content: SiteContent) {
 function iconFor(label: string) {
   const l = label.toLowerCase();
   if (l.includes("mail")) return Mail;
-  if (l.includes("insta")) return Instagram;
+  if (l.includes("insta")) return AtSign;
   if (l.includes("phone") || l.includes("tel") || l.includes("whatsapp")) return Phone;
   if (l.includes("address") || l.includes("studio") || l.includes("location")) return MapPin;
   if (l.includes("web") || l.includes("site")) return Globe;
