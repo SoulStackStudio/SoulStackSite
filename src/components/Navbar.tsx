@@ -24,7 +24,7 @@ export default function Navbar() {
             <img
               src="/logo-ink.png"
               alt="Soul Stack Studio"
-              className="h-16 w-auto sm:h-20"
+              className="h-20 w-auto sm:h-24"
             />
           </Link>
           <nav className="flex items-center gap-6 sm:gap-8">
