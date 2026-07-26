@@ -35,7 +35,7 @@ export function resolveContact(content: SiteContent) {
 }
 
 function iconFor(label: string) {
-  const l = label.toLowerCase();
+  const l = label.toLowerCase().replace(/\s+/g, "");
   if (l.includes("mail")) return Mail;
   if (l.includes("insta")) return AtSign;
   if (l.includes("phone") || l.includes("tel") || l.includes("whatsapp")) return Phone;
@@ -45,7 +45,7 @@ function iconFor(label: string) {
 }
 
 function linkFor(item: ContactItem): string | null {
-  const label = item.label.toLowerCase();
+  const label = item.label.toLowerCase().replace(/\s+/g, "");
   const value = item.value.trim();
   if (label.includes("insta")) return `https://instagram.com/${value.replace(/^@/, "")}`;
   if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return `mailto:${value}`;
@@ -115,7 +115,8 @@ export default function ContactSection({ content }: { content: SiteContent }) {
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      {/* flex-wrap + justify-center so an odd last card sits centered */}
+      <div className="flex flex-wrap justify-center gap-4">
         {contact.items.map((item, i) => {
           const Icon = iconFor(item.label);
           const href = linkFor(item);
@@ -133,7 +134,7 @@ export default function ContactSection({ content }: { content: SiteContent }) {
             </>
           );
           const cardClass =
-            "flex items-center gap-4 rounded-xl border border-seafoam bg-mist px-5 py-4 transition";
+            "flex w-full items-center gap-4 rounded-xl border border-seafoam bg-mist px-5 py-4 transition sm:w-[calc(50%-0.5rem)]";
           return href ? (
             <a
               key={i}
