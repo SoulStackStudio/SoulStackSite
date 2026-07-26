@@ -24,9 +24,6 @@ export default function Hero({ content }: { content: SiteContent }) {
       <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/60" />
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 py-24 text-center text-cream">
-        <p className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-aqua">
-          Soul Stack Studio
-        </p>
         <EditableText
           as="h1"
           value={content.hero.headline}
