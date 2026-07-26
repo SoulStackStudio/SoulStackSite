@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Lock, LogOut } from "lucide-react";
+import { Lock, LogOut, ShoppingBag } from "lucide-react";
 import { useAdmin } from "./AdminProvider";
+import { useCart } from "./CartProvider";
 import AdminLoginModal from "./AdminLoginModal";
+import CartDrawer from "./CartDrawer";
 
 export default function Navbar() {
   const { isAdmin, openLogin, logout } = useAdmin();
+  const { count, setOpen } = useCart();
   const pathname = usePathname();
 
   const linkClass = (href: string) =>
@@ -34,6 +37,19 @@ export default function Navbar() {
             <Link href="/shop" className={linkClass("/shop")}>
               Shop
             </Link>
+            <button
+              onClick={() => setOpen(true)}
+              className="relative text-ink/60 transition hover:text-brand"
+              title="Cart"
+              aria-label={`Open cart (${count} items)`}
+            >
+              <ShoppingBag size={19} />
+              {count > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-semibold text-cream">
+                  {count}
+                </span>
+              )}
+            </button>
             {isAdmin ? (
               <div className="flex items-center gap-3">
                 <span className="rounded-full bg-seafoam px-3 py-1 text-xs font-medium text-brand-deep">
@@ -62,6 +78,7 @@ export default function Navbar() {
         </div>
       </header>
       <AdminLoginModal />
+      <CartDrawer />
     </>
   );
 }

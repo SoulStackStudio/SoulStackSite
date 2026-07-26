@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+import ClearCartOnSuccess from "@/components/ClearCartOnSuccess";
 
 export const metadata: Metadata = {
   title: "Order Confirmed — Soul Stack Studio",
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function SuccessPage() {
   return (
     <section className="flex min-h-[60vh] items-center justify-center px-6 py-24">
+      <ClearCartOnSuccess />
       <div className="max-w-md text-center">
         <CheckCircle2 size={56} className="mx-auto text-turquoise" strokeWidth={1.5} />
         <h1 className="mt-6 font-display text-4xl font-semibold text-ink">Thank you</h1>

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { X, Loader2 } from "lucide-react";
+import { X, ShoppingBag } from "lucide-react";
 import type { Print } from "@/lib/types";
 import { formatPrice } from "@/lib/types";
+import { useCart } from "./CartProvider";
 
 interface Props {
   print: Print;
@@ -12,27 +13,20 @@ interface Props {
 
 export default function ProductModal({ print, onClose }: Props) {
   const [sizeLabel, setSizeLabel] = useState(print.sizes[0]?.label ?? "");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { add } = useCart();
 
   const selected = print.sizes.find((s) => s.label === sizeLabel);
 
-  async function buy() {
-    setBusy(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ printId: print.id, sizeLabel }),
-      });
-      const d = await res.json();
-      if (!res.ok || !d.url) throw new Error(d?.error ?? "Checkout failed");
-      window.location.href = d.url;
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Checkout failed");
-      setBusy(false);
-    }
+  function addToCart() {
+    if (!selected) return;
+    add({
+      printId: print.id,
+      sizeLabel: selected.label,
+      title: print.title,
+      image: print.image,
+      priceCents: selected.priceCents,
+    });
+    onClose();
   }
 
   return (
@@ -88,19 +82,13 @@ export default function ProductModal({ print, onClose }: Props) {
 
           <div className="mt-auto pt-10">
             <button
-              onClick={buy}
-              disabled={busy || !selected}
+              onClick={addToCart}
+              disabled={!selected}
               className="flex w-full items-center justify-center gap-2 rounded-full bg-brand py-3.5 text-sm font-medium tracking-widest uppercase text-cream transition hover:bg-brand-deep disabled:opacity-60"
             >
-              {busy ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" /> Redirecting…
-                </>
-              ) : (
-                <>Buy Print{selected ? ` — ${formatPrice(selected.priceCents)}` : ""}</>
-              )}
+              <ShoppingBag size={16} />
+              Add to Cart{selected ? ` — ${formatPrice(selected.priceCents)}` : ""}
             </button>
-            {error && <p className="mt-3 text-center text-sm text-red-500">{error}</p>}
             <p className="mt-4 text-center text-xs text-ink/40">
               Secure checkout by Stripe · Ships ready to frame
             </p>

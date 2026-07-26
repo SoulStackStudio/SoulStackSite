@@ -55,11 +55,26 @@ export async function POST(req: NextRequest) {
   const amount = ((session.amount_total ?? 0) / 100).toFixed(2);
   const addressBlock = formatAddress(shipping?.name ?? customer?.name ?? undefined, shipping?.address ?? null);
 
+  // List the purchased items from Stripe (source of truth for multi-item carts);
+  // fall back to the summary we stored in metadata at checkout time.
+  let itemsBlock = meta.summary ?? "See Stripe dashboard for items";
+  try {
+    const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 100 });
+    if (lineItems.data.length > 0) {
+      itemsBlock = lineItems.data
+        .map((li) => `  ${li.quantity}× ${li.description}`)
+        .join("\n");
+    }
+  } catch (err) {
+    console.error("Could not list line items, using metadata summary:", err);
+  }
+
   const lines = [
     `NEW PRINT ORDER — ${orderId}`,
     ``,
-    `Print:  ${meta.printTitle ?? "Unknown"}`,
-    `Size:   ${meta.sizeLabel ?? "Unknown"}`,
+    `ITEMS:`,
+    itemsBlock,
+    ``,
     `Paid:   €${amount} ${session.currency?.toUpperCase() ?? "EUR"}`,
     ``,
     `SHIP TO:`,
@@ -85,7 +100,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: process.env.ORDER_FROM_EMAIL || "Soul Stack Studio <onboarding@resend.dev>",
       to: printerEmail,
-      subject: `New print order ${orderId} — ${meta.printTitle ?? ""} ${meta.sizeLabel ?? ""}`,
+      subject: `New print order ${orderId} — €${amount}`,
       text,
     });
   } catch (err) {
