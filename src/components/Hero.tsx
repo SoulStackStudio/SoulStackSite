@@ -25,7 +25,7 @@ export default function Hero({ content }: { content: SiteContent }) {
 
       <div className="relative z-10 mx-auto max-w-3xl px-6 py-24 text-center text-white">
         <p className="mb-4 text-xs font-medium uppercase tracking-[0.35em] text-aqua">
-          Soul Stacked Studio
+          Soul Stack Studio
         </p>
         <EditableText
           as="h1"

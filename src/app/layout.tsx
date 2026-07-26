@@ -17,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Soul Stacked Studio — Fine Art Photo Prints",
+  title: "Soul Stack Studio — Fine Art Photo Prints",
   description:
-    "Luminous, gallery-standard photographic prints from Soul Stacked Studio. Archival quality, shipped ready to frame.",
+    "Luminous, gallery-standard photographic prints from Soul Stack Studio. Archival quality, shipped ready to frame.",
 };
 
 export default function RootLayout({

@@ -6,7 +6,7 @@ import ShopHeader from "@/components/ShopHeader";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Shop — Soul Stacked Studio",
+  title: "Shop — Soul Stack Studio",
   description: "Browse the full collection of fine-art photographic prints.",
 };
 

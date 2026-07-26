@@ -10,13 +10,13 @@ export const defaultContent: SiteContent = {
   hero: {
     headline: "Moments of stillness, made to keep",
     subtext:
-      "Fine-art photographic prints from Soul Stacked Studio — luminous, considered, and printed to gallery standard.",
+      "Fine-art photographic prints from Soul Stack Studio — luminous, considered, and printed to gallery standard.",
     image:
       "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=2000&auto=format&fit=crop",
   },
   about: {
     heading: "Behind the Lens",
-    body: "Soul Stacked Studio began at the water's edge — chasing the quiet hour when the light softens and the sea holds its breath. Every print in this collection was captured in a single, unrepeatable moment and is produced on archival fine-art paper with pigment inks rated to last a lifetime. Each piece is checked by hand before it ships, so what arrives at your door is exactly what the ocean gave us.",
+    body: "Soul Stack Studio began at the water's edge — chasing the quiet hour when the light softens and the sea holds its breath. Every print in this collection was captured in a single, unrepeatable moment and is produced on archival fine-art paper with pigment inks rated to last a lifetime. Each piece is checked by hand before it ships, so what arrives at your door is exactly what the ocean gave us.",
   },
   shop: {
     heading: "The Collection",

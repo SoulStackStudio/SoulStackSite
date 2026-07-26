@@ -1,4 +1,4 @@
-# Soul Stacked Studio
+# Soul Stack Studio
 
 A 2-page e-commerce site for selling fine-art photo prints. Next.js (App Router) + Tailwind, Stripe Checkout for payments, Resend for automatic order emails to the printer, and a built-in inline admin mode — no external CMS.
 

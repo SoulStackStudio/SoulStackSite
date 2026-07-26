@@ -20,7 +20,7 @@ export default function Navbar() {
       <header className="sticky top-0 z-40 border-b border-seafoam/80 bg-white/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
           <Link href="/" className="font-display text-2xl font-semibold tracking-wide text-ink">
-            Soul <span className="text-brand">Stacked</span> Studio
+            Soul <span className="text-brand">Stack</span> Studio
           </Link>
           <nav className="flex items-center gap-6 sm:gap-8">
             <Link href="/" className={linkClass("/")}>

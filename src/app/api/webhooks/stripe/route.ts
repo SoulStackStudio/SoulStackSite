@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
   try {
     const resend = new Resend(resendKey);
     await resend.emails.send({
-      from: process.env.ORDER_FROM_EMAIL || "Soul Stacked Studio <onboarding@resend.dev>",
+      from: process.env.ORDER_FROM_EMAIL || "Soul Stack Studio <onboarding@resend.dev>",
       to: printerEmail,
       subject: `New print order ${orderId} — ${meta.printTitle ?? ""} ${meta.sizeLabel ?? ""}`,
       text,

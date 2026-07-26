@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Order Confirmed — Soul Stacked Studio",
+  title: "Order Confirmed — Soul Stack Studio",
 };
 
 export default function SuccessPage() {
