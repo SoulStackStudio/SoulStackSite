@@ -1,9 +1,9 @@
 import type { SiteContent } from "./types";
 
 const defaultSizes = [
-  { label: '8×10"', priceCents: 4500 },
-  { label: '12×16"', priceCents: 7500 },
-  { label: '20×30"', priceCents: 12000 },
+  { label: "20×25 cm", priceCents: 4500 },
+  { label: "30×40 cm", priceCents: 7500 },
+  { label: "50×75 cm", priceCents: 12000 },
 ];
 
 export const defaultContent: SiteContent = {

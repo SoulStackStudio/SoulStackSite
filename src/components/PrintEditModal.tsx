@@ -35,9 +35,9 @@ export default function PrintEditModal({ print, onClose }: Props) {
   const [featured, setFeatured] = useState(print?.featured ?? false);
   const [sizes, setSizes] = useState<SizeDraft[]>(
     print?.sizes.map((s) => ({ label: s.label, price: (s.priceCents / 100).toString() })) ?? [
-      { label: '8×10"', price: "45" },
-      { label: '12×16"', price: "75" },
-      { label: '20×30"', price: "120" },
+      { label: "20×25 cm", price: "45" },
+      { label: "30×40 cm", price: "75" },
+      { label: "50×75 cm", price: "120" },
     ]
   );
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +54,7 @@ export default function PrintEditModal({ print, onClose }: Props) {
     for (const s of sizes) {
       const price = parseFloat(s.price);
       if (!s.label.trim() || isNaN(price) || price < 0.5) {
-        return setError("Every size needs a label and a price of at least $0.50");
+        return setError("Every size needs a label and a price of at least €0.50");
       }
       parsedSizes.push({ label: s.label.trim(), priceCents: Math.round(price * 100) });
     }
@@ -153,12 +153,12 @@ export default function PrintEditModal({ print, onClose }: Props) {
                   <input
                     value={s.label}
                     onChange={(e) => setSize(i, { label: e.target.value })}
-                    placeholder={'e.g. 8×10"'}
+                    placeholder="e.g. 30×40 cm"
                     className={inputClass}
                   />
                   <div className="relative w-32">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/40">
-                      $
+                      €
                     </span>
                     <input
                       value={s.price}

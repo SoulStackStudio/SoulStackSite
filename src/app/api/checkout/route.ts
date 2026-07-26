@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       {
         quantity: 1,
         price_data: {
-          currency: "usd",
+          currency: "eur",
           unit_amount: size.priceCents,
           product_data: {
             name: `${print.title} — ${size.label} print`,

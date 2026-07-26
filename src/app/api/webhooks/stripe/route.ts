@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
     ``,
     `Print:  ${meta.printTitle ?? "Unknown"}`,
     `Size:   ${meta.sizeLabel ?? "Unknown"}`,
-    `Paid:   $${amount} ${session.currency?.toUpperCase() ?? "USD"}`,
+    `Paid:   €${amount} ${session.currency?.toUpperCase() ?? "EUR"}`,
     ``,
     `SHIP TO:`,
     addressBlock,
