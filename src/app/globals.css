@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+@theme {
+  /* Soul Stacked Studio — oceanic palette */
+  --color-ink: #17313a; /* deep sea slate for text */
+  --color-mist: #f7fbfa; /* near-white section background */
+  --color-seafoam: #e4f3f0; /* soft aqua tint */
+  --color-brand: #0f766e; /* deep teal */
+  --color-brand-deep: #0b5a54;
+  --color-turquoise: #14b8a6;
+  --color-aqua: #2dd4bf;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-serif);
+}
+
+::selection {
+  background: var(--color-aqua);
+  color: #ffffff;
+}
