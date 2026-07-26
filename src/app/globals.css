@@ -6,15 +6,15 @@
 }
 
 @theme {
-  /* Soul Stack Studio — oceanic palette on warm sand */
-  --color-ink: #17313a; /* deep sea slate for text */
-  --color-cream: #faf5e9; /* warm sandy cream — replaces white everywhere */
-  --color-mist: #f3ecda; /* deeper sand for tinted sections */
-  --color-seafoam: #e2e9d9; /* sun-bleached seagrass tint */
-  --color-brand: #0f766e; /* deep teal */
-  --color-brand-deep: #0b5a54;
-  --color-turquoise: #14b8a6;
-  --color-aqua: #2dd4bf;
+  /* Soul Stack Studio — Mediterranean palette (Engie Designs swatch) */
+  --color-ink: #004756; /* Crab Nebula — text */
+  --color-cream: #d0cdc5; /* Cool Slate — main background & light surfaces */
+  --color-mist: #c4bfb4; /* Cool Slate deepened toward Laminated Wood — tinted sections */
+  --color-seafoam: #aea798; /* Laminated Wood (lightened) — borders & soft fills */
+  --color-brand: #29667c; /* Discovery Bay — buttons & links */
+  --color-brand-deep: #004756; /* Crab Nebula — hover states */
+  --color-turquoise: #4a8fc9; /* Greek Sea (deepened) — accents on light bg */
+  --color-aqua: #6daae3; /* Greek Sea — bright accents */
 }
 
 body {
