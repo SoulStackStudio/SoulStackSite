@@ -21,6 +21,11 @@ export interface HeroImage {
   zoom: number;
 }
 
+export interface ContactItem {
+  label: string;
+  value: string;
+}
+
 export interface SiteContent {
   hero: {
     headline: string;
@@ -36,6 +41,12 @@ export interface SiteContent {
   shop: {
     heading: string;
     subtext: string;
+  };
+  /** optional so older saved content keeps working — defaults live in ContactSection */
+  contact?: {
+    heading: string;
+    subtext: string;
+    items: ContactItem[];
   };
   prints: Print[];
 }

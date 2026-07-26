@@ -32,11 +32,14 @@ export default function Navbar() {
             </span>
           </Link>
           <nav className="flex items-center gap-4 sm:gap-8">
-            <Link href="/" className={linkClass("/")}>
+            <Link href="/" className={`hidden sm:inline ${linkClass("/")}`}>
               Home
             </Link>
             <Link href="/shop" className={linkClass("/shop")}>
               Shop
+            </Link>
+            <Link href="/contact" className={linkClass("/contact")}>
+              Contact
             </Link>
             <button
               onClick={() => setOpen(true)}
