@@ -18,13 +18,13 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-seafoam/80 bg-cream/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-          <Link href="/" className="shrink-0">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2">
+          <Link href="/" className="shrink-0 -my-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/logo-ink.png"
               alt="Soul Stack Studio"
-              className="h-10 w-auto sm:h-12"
+              className="h-16 w-auto sm:h-20"
             />
           </Link>
           <nav className="flex items-center gap-6 sm:gap-8">
