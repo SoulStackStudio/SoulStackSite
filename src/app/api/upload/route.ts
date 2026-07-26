@@ -4,7 +4,8 @@ import { saveImage } from "@/lib/store";
 
 export const dynamic = "force-dynamic";
 
-const MAX_BYTES = 8 * 1024 * 1024; // 8 MB
+// Netlify function request bodies cap out around 6 MB — stay under it
+const MAX_BYTES = 4.5 * 1024 * 1024;
 const ALLOWED = ["jpg", "jpeg", "png", "webp", "gif", "avif"];
 
 export async function POST(req: NextRequest) {
@@ -17,7 +18,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "No file provided" }, { status: 400 });
   }
   if (file.size > MAX_BYTES) {
-    return NextResponse.json({ error: "Image must be under 8 MB" }, { status: 400 });
+    return NextResponse.json({ error: "Image must be under 4 MB" }, { status: 400 });
   }
   const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
   if (!ALLOWED.includes(ext)) {
