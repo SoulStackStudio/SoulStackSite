@@ -62,11 +62,22 @@ h3,
   }
 }
 
+@keyframes cart-toast-out {
+  to {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
 .cart-toast {
   /* centering lives here (not in a Tailwind translate utility) so the
-     entry animation and the resting position never fight each other */
+     entry animation and the resting position never fight each other.
+     Fade-out starts at 2.25s; the provider removes the element at 2.6s,
+     right as the fade finishes. */
   transform: translate(-50%, 0);
-  animation: cart-toast-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  animation:
+    cart-toast-in 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    cart-toast-out 0.35s ease-in 2.25s forwards;
 }
 
 @keyframes badge-pop {
