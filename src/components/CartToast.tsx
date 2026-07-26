@@ -12,7 +12,7 @@ export default function CartToast() {
   return (
     <div
       key={toast.id}
-      className="cart-toast fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full bg-ink px-5 py-3 shadow-2xl"
+      className="cart-toast fixed bottom-6 left-1/2 z-50 flex items-center gap-3 rounded-full bg-ink px-5 py-3 shadow-2xl"
       role="status"
     >
       <CheckCircle2 size={18} className="shrink-0 text-aqua" />

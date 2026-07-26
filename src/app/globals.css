@@ -63,6 +63,9 @@ h3,
 }
 
 .cart-toast {
+  /* centering lives here (not in a Tailwind translate utility) so the
+     entry animation and the resting position never fight each other */
+  transform: translate(-50%, 0);
   animation: cart-toast-in 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
