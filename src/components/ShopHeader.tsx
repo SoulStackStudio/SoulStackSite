@@ -1,10 +1,20 @@
 "use client";
 
-import type { SiteContent } from "@/lib/types";
+import type { SiteContent, TextStyle } from "@/lib/types";
 import { useAdmin } from "./AdminProvider";
 import EditableText from "./EditableText";
 
-export default function ShopHeader({ content }: { content: SiteContent }) {
+/**
+ * Takes just the fields it renders — passing the whole SiteContent would
+ * serialize every exhibition and its prints into the shop page payload.
+ */
+export default function ShopHeader({
+  shop,
+  styles,
+}: {
+  shop: SiteContent["shop"];
+  styles?: Record<string, TextStyle>;
+}) {
   const { updateContent } = useAdmin();
 
   return (
@@ -12,8 +22,8 @@ export default function ShopHeader({ content }: { content: SiteContent }) {
       <div className="mx-auto mb-8 h-px w-16 bg-turquoise" />
       <EditableText
         as="h1"
-        value={content.shop.heading}
-        textStyle={content.styles?.["shop.heading"]}
+        value={shop.heading}
+        textStyle={styles?.["shop.heading"]}
         onSave={(v, st) =>
           updateContent((c) => ({
             ...c,
@@ -26,8 +36,8 @@ export default function ShopHeader({ content }: { content: SiteContent }) {
       <EditableText
         as="p"
         multiline
-        value={content.shop.subtext}
-        textStyle={content.styles?.["shop.subtext"]}
+        value={shop.subtext}
+        textStyle={styles?.["shop.subtext"]}
         onSave={(v, st) =>
           updateContent((c) => ({
             ...c,
