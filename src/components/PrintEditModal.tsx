@@ -3,12 +3,15 @@
 import { useState } from "react";
 import { X, Plus, Trash2 } from "lucide-react";
 import type { Print } from "@/lib/types";
+import { mapPrintList } from "@/lib/types";
 import { useAdmin } from "./AdminProvider";
 import ImagePicker from "./ImagePicker";
 
 interface Props {
   /** null = creating a new print */
   print: Print | null;
+  /** When set, the print is added to / edited within that exhibition. */
+  exhibitionSlug?: string;
   onClose: () => void;
 }
 
@@ -27,18 +30,24 @@ function slugify(title: string): string {
   );
 }
 
-export default function PrintEditModal({ print, onClose }: Props) {
+export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props) {
   const { updateContent, saving } = useAdmin();
   const [title, setTitle] = useState(print?.title ?? "");
   const [description, setDescription] = useState(print?.description ?? "");
   const [image, setImage] = useState(print?.image ?? "");
   const [featured, setFeatured] = useState(print?.featured ?? false);
   const [sizes, setSizes] = useState<SizeDraft[]>(
-    print?.sizes.map((s) => ({ label: s.label, price: (s.priceCents / 100).toString() })) ?? [
-      { label: "20×25 cm", price: "45" },
-      { label: "30×40 cm", price: "75" },
-      { label: "50×75 cm", price: "120" },
-    ]
+    print?.sizes.map((s) => ({ label: s.label, price: (s.priceCents / 100).toString() })) ??
+      (exhibitionSlug
+        ? [
+            { label: "A3", price: "156" },
+            { label: "A2", price: "195" },
+          ]
+        : [
+            { label: "20×25 cm", price: "45" },
+            { label: "30×40 cm", price: "75" },
+            { label: "50×75 cm", price: "120" },
+          ])
   );
   const [error, setError] = useState<string | null>(null);
 
@@ -60,27 +69,24 @@ export default function PrintEditModal({ print, onClose }: Props) {
     }
     if (parsedSizes.length === 0) return setError("Add at least one size");
 
-    const err = await updateContent((c) => {
-      if (print) {
-        return {
-          ...c,
-          prints: c.prints.map((p) =>
+    const err = await updateContent((c) =>
+      mapPrintList(c, exhibitionSlug, (list) => {
+        if (print) {
+          return list.map((p) =>
             p.id === print.id
               ? { ...p, title: title.trim(), description: description.trim(), image: image.trim(), featured, sizes: parsedSizes }
               : p
-          ),
-        };
-      }
-      let id = slugify(title);
-      while (c.prints.some((p) => p.id === id)) id = `${id}-${Math.floor(Math.random() * 1000)}`;
-      return {
-        ...c,
-        prints: [
-          ...c.prints,
+          );
+        }
+        const base = exhibitionSlug ? `${exhibitionSlug}--${slugify(title)}` : slugify(title);
+        let id = base;
+        while (list.some((p) => p.id === id)) id = `${base}-${Math.floor(Math.random() * 1000)}`;
+        return [
+          ...list,
           { id, title: title.trim(), description: description.trim(), image: image.trim(), featured, sizes: parsedSizes },
-        ],
-      };
-    });
+        ];
+      })
+    );
     if (err) setError(err);
     else onClose();
   }
@@ -133,15 +139,17 @@ export default function PrintEditModal({ print, onClose }: Props) {
             <ImagePicker value={image} onChange={setImage} />
           </div>
 
-          <label className="flex cursor-pointer items-center gap-2 text-sm text-ink/70">
-            <input
-              type="checkbox"
-              checked={featured}
-              onChange={(e) => setFeatured(e.target.checked)}
-              className="h-4 w-4 accent-brand"
-            />
-            Show on homepage (featured)
-          </label>
+          {!exhibitionSlug && (
+            <label className="flex cursor-pointer items-center gap-2 text-sm text-ink/70">
+              <input
+                type="checkbox"
+                checked={featured}
+                onChange={(e) => setFeatured(e.target.checked)}
+                className="h-4 w-4 accent-brand"
+              />
+              Show on homepage (featured)
+            </label>
+          )}
 
           <div>
             <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-ink/50">

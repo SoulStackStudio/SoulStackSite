@@ -32,6 +32,24 @@ export interface TextStyle {
   align?: "left" | "center" | "right";
 }
 
+export interface Exhibition {
+  /** URL segment: /exhibitions/<slug> — this is what the QR codes point at */
+  slug: string;
+  title: string;
+  /** one short line under the title, e.g. "Nazare, Portugal - 2026" */
+  tagline: string;
+  /** the full "Our Story" text; blank lines separate paragraphs */
+  story: string;
+  /** one paper stock for the whole show (shown in the header and on every print) */
+  paper: string;
+  /** edition + certificate line, e.g. "Limited edition of 30" */
+  edition: string;
+  /** the longer 'Fine Art Photography Prints' copy, shown below the grid */
+  printInfo: string;
+  coverImage: string;
+  prints: Print[];
+}
+
 export interface SiteContent {
   hero: {
     headline: string;
@@ -56,6 +74,8 @@ export interface SiteContent {
   };
   /** per-text-box style overrides, keyed by field id (e.g. "hero.headline") */
   styles?: Record<string, TextStyle>;
+  /** optional so older saved content keeps working — each show is its own "folder" */
+  exhibitions?: Exhibition[];
   prints: Print[];
 }
 
@@ -68,4 +88,45 @@ export function textStyleCss(style?: TextStyle): React.CSSProperties {
 
 export function formatPrice(cents: number): string {
   return `€${(cents / 100).toFixed(cents % 100 === 0 ? 0 : 2)}`;
+}
+
+/** Every print on the site, main shop and exhibitions alike. */
+export function allPrints(content: SiteContent): Print[] {
+  return [...content.prints, ...(content.exhibitions ?? []).flatMap((e) => e.prints)];
+}
+
+/**
+ * Resolve a print id to the print and the show it belongs to (null exhibition =
+ * main shop). Exhibition print ids are namespaced "<slug>--<print>", so ids stay
+ * unique across shows and the cart can keep using a single flat id.
+ */
+export function findPrint(
+  content: SiteContent,
+  id: string
+): { print: Print; exhibition: Exhibition | null } | null {
+  const own = content.prints.find((p) => p.id === id);
+  if (own) return { print: own, exhibition: null };
+  for (const exhibition of content.exhibitions ?? []) {
+    const print = exhibition.prints.find((p) => p.id === id);
+    if (print) return { print, exhibition };
+  }
+  return null;
+}
+
+/**
+ * Apply a mutation to one print list — the main shop when slug is undefined,
+ * otherwise the matching exhibition. Lets the shared admin grid edit either.
+ */
+export function mapPrintList(
+  content: SiteContent,
+  slug: string | undefined,
+  fn: (prints: Print[]) => Print[]
+): SiteContent {
+  if (!slug) return { ...content, prints: fn(content.prints) };
+  return {
+    ...content,
+    exhibitions: (content.exhibitions ?? []).map((e) =>
+      e.slug === slug ? { ...e, prints: fn(e.prints) } : e
+    ),
+  };
 }

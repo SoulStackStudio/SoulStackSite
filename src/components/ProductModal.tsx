@@ -8,10 +8,14 @@ import { useCart } from "./CartProvider";
 
 interface Props {
   print: Print;
+  /** Exhibition paper stock, shown under the description when present. */
+  paper?: string;
+  /** Exhibition edition / certificate line. */
+  edition?: string;
   onClose: () => void;
 }
 
-export default function ProductModal({ print, onClose }: Props) {
+export default function ProductModal({ print, paper, edition, onClose }: Props) {
   const [sizeLabel, setSizeLabel] = useState(print.sizes[0]?.label ?? "");
   const { add } = useCart();
 
@@ -58,6 +62,23 @@ export default function ProductModal({ print, onClose }: Props) {
 
           <h2 className="font-display text-3xl font-semibold text-ink">{print.title}</h2>
           <p className="mt-4 text-sm leading-relaxed text-ink/65">{print.description}</p>
+
+          {(paper || edition) && (
+            <dl className="mt-6 space-y-1.5 border-t border-seafoam pt-5 text-xs text-ink/55">
+              {paper && (
+                <div className="flex gap-2">
+                  <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Paper</dt>
+                  <dd>{paper}</dd>
+                </div>
+              )}
+              {edition && (
+                <div className="flex gap-2">
+                  <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Edition</dt>
+                  <dd>{edition}</dd>
+                </div>
+              )}
+            </dl>
+          )}
 
           <div className="mt-8">
             <p className="mb-3 text-xs font-medium uppercase tracking-widest text-ink/45">

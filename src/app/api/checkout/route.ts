@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getContent } from "@/lib/store";
+import { findPrint } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
@@ -51,11 +52,14 @@ export async function POST(req: NextRequest) {
     if (!Number.isFinite(qty) || qty < 1 || qty > 20) {
       return NextResponse.json({ error: "Invalid quantity" }, { status: 400 });
     }
-    const print = content.prints.find((p) => p.id === line.printId);
+    // Looks in the main shop and in every exhibition.
+    const found = findPrint(content, line.printId);
+    const print = found?.print;
     const size = print?.sizes.find((s) => s.label === line.sizeLabel);
-    if (!print || !size) {
+    if (!found || !print || !size) {
       return NextResponse.json({ error: "Print or size not found" }, { status: 404 });
     }
+    const exhibition = found.exhibition;
 
     // Stripe can only display images it can reach — skip relative/localhost URLs.
     const images =
@@ -71,14 +75,25 @@ export async function POST(req: NextRequest) {
         currency: "eur",
         unit_amount: size.priceCents,
         product_data: {
-          name: `${print.title} — ${size.label} print`,
-          description: print.description.slice(0, 300),
+          name: exhibition
+            ? `${print.title} — ${size.label} · ${exhibition.title}`
+            : `${print.title} — ${size.label} print`,
+          description: (exhibition
+            ? `${exhibition.paper}. ${exhibition.edition}.`
+            : print.description
+          ).slice(0, 300),
           ...(images.length ? { images } : {}),
         },
       },
     });
-    summaryParts.push(`${qty}x ${print.title} (${size.label})`);
+    summaryParts.push(
+      `${qty}x ${print.title} (${size.label})${exhibition ? ` [${exhibition.title}]` : ""}`
+    );
   }
+
+  // Send shoppers back where they came from — an exhibition folder, or the shop.
+  const firstShow = findPrint(content, lines[0].printId)?.exhibition;
+  const cancelPath = firstShow ? `/exhibitions/${firstShow.slug}` : "/shop";
 
   const stripe = new Stripe(secretKey);
   const session = await stripe.checkout.sessions.create({
@@ -90,7 +105,7 @@ export async function POST(req: NextRequest) {
       summary: summaryParts.join("; ").slice(0, 480),
     },
     success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${origin}/shop`,
+    cancel_url: `${origin}${cancelPath}`,
   });
 
   return NextResponse.json({ url: session.url });

@@ -20,15 +20,26 @@ async function blobStore(name: string) {
   return getStore({ name, consistency: "strong" });
 }
 
+/**
+ * Content saved before a feature existed won't have its field. Fill those in
+ * from the seed so an older saved blob keeps working after a deploy.
+ */
+function withDefaults(content: SiteContent): SiteContent {
+  if (content.exhibitions === undefined) {
+    return { ...content, exhibitions: defaultContent.exhibitions };
+  }
+  return content;
+}
+
 export async function getContent(): Promise<SiteContent> {
   if (onNetlify()) {
     const store = await blobStore("content");
     const data = (await store.get(CONTENT_KEY, { type: "json" })) as SiteContent | null;
-    return data ?? defaultContent;
+    return withDefaults(data ?? defaultContent);
   }
   try {
     const raw = await fs.readFile(CONTENT_FILE, "utf-8");
-    return JSON.parse(raw) as SiteContent;
+    return withDefaults(JSON.parse(raw) as SiteContent);
   } catch {
     await saveContent(defaultContent);
     return defaultContent;
