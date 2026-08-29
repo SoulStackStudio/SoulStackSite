@@ -11,6 +11,7 @@ export default function Footer() {
         <nav className="mt-2 flex gap-5 text-xs uppercase tracking-widest">
           <a href="/" className="text-ink/50 transition hover:text-brand">Home</a>
           <a href="/shop" className="text-ink/50 transition hover:text-brand">Shop</a>
+          <a href="/exhibitions" className="text-ink/50 transition hover:text-brand">Exhibitions</a>
           <a href="/contact" className="text-ink/50 transition hover:text-brand">Contact</a>
         </nav>
         <p className="mt-2 text-xs text-ink/35">

@@ -1,22 +1,38 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Lock, LogOut, ShoppingBag } from "lucide-react";
+import { Lock, LogOut, Menu, ShoppingBag, X } from "lucide-react";
 import { useAdmin } from "./AdminProvider";
 import { useCart } from "./CartProvider";
 import AdminLoginModal from "./AdminLoginModal";
 import CartDrawer from "./CartDrawer";
 import CartToast from "./CartToast";
 
+const LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/shop", label: "Shop" },
+  { href: "/exhibitions", label: "Exhibitions" },
+  { href: "/contact", label: "Contact" },
+];
+
 export default function Navbar() {
   const { isAdmin, openLogin, logout } = useAdmin();
   const { count, setOpen } = useCart();
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Never leave the menu hanging open across a navigation.
+  useEffect(() => setMenuOpen(false), [pathname]);
+
+  // An exhibition page should still light up the Exhibitions link.
+  const isCurrent = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   const linkClass = (href: string) =>
     `text-sm tracking-widest uppercase transition ${
-      pathname === href ? "text-brand" : "text-ink/60 hover:text-brand"
+      isCurrent(href) ? "text-brand" : "text-ink/60 hover:text-brand"
     }`;
 
   return (
@@ -31,16 +47,15 @@ export default function Navbar() {
               Photography
             </span>
           </Link>
+
           <nav className="flex items-center gap-4 sm:gap-8">
-            <Link href="/" className={`hidden sm:inline ${linkClass("/")}`}>
-              Home
-            </Link>
-            <Link href="/shop" className={linkClass("/shop")}>
-              Shop
-            </Link>
-            <Link href="/contact" className={linkClass("/contact")}>
-              Contact
-            </Link>
+            {/* Inline from sm up; on phones these live in the panel below. */}
+            {LINKS.map((l) => (
+              <Link key={l.href} href={l.href} className={`hidden sm:inline ${linkClass(l.href)}`}>
+                {l.label}
+              </Link>
+            ))}
+
             <button
               onClick={() => setOpen(true)}
               className="relative text-ink/60 transition hover:text-brand"
@@ -57,6 +72,7 @@ export default function Navbar() {
                 </span>
               )}
             </button>
+
             {isAdmin ? (
               <div className="flex items-center gap-3">
                 <span className="hidden rounded-full bg-seafoam px-3 py-1 text-xs font-medium text-brand-deep sm:inline-block">
@@ -81,8 +97,35 @@ export default function Navbar() {
                 <Lock size={15} />
               </button>
             )}
+
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="text-ink/60 transition hover:text-brand sm:hidden"
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </nav>
         </div>
+
+        {/* Four links won't fit inline on a narrow phone, so they get a panel. */}
+        {menuOpen && (
+          <nav className="border-t border-seafoam/70 bg-cream/95 backdrop-blur-md sm:hidden">
+            <div className="mx-auto flex max-w-6xl flex-col px-4">
+              {LINKS.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`border-b border-seafoam/40 py-3.5 last:border-0 ${linkClass(l.href)}`}
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
       </header>
       <AdminLoginModal />
       <CartDrawer />
