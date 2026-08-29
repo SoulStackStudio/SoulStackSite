@@ -20,7 +20,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Soul Stack Studio — Fine Art Photo Prints",
   description:
-    "Luminous, gallery-standard photographic prints from Soul Stack Studio. Archival quality, shipped ready to frame.",
+    "Luminous, gallery-standard photographic prints from Soul Stack Studio. Archival quality, flat-packed and shipped unframed.",
 };
 
 export default function RootLayout({

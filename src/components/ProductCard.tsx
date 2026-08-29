@@ -6,6 +6,8 @@ import { formatPrice } from "@/lib/types";
 
 interface Props {
   print: Print;
+  /** Tile shape. Exhibition work is landscape; the shop's own prints are portrait. */
+  aspect?: string;
   onOpen: () => void;
   manage?: boolean;
   onEdit?: () => void;
@@ -13,7 +15,15 @@ interface Props {
   onMove?: (dir: -1 | 1) => void;
 }
 
-export default function ProductCard({ print, onOpen, manage, onEdit, onDelete, onMove }: Props) {
+export default function ProductCard({
+  print,
+  aspect = "4/5",
+  onOpen,
+  manage,
+  onEdit,
+  onDelete,
+  onMove,
+}: Props) {
   const fromPrice = Math.min(...print.sizes.map((s) => s.priceCents));
 
   return (
@@ -24,7 +34,8 @@ export default function ProductCard({ print, onOpen, manage, onEdit, onDelete, o
           <img
             src={print.image}
             alt={print.title}
-            className="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            className="w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            style={{ aspectRatio: aspect }}
             loading="lazy"
           />
         </div>

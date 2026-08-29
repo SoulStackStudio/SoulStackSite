@@ -125,7 +125,7 @@ export default function CartDrawer() {
           </button>
           {error && <p className="mt-3 text-center text-sm text-red-500">{error}</p>}
           <p className="mt-3 text-center text-xs text-ink/40">
-            Secure checkout by Stripe · Ships ready to frame
+            Secure checkout by Stripe · Flat-packed, shipped unframed
           </p>
         </div>
       </div>

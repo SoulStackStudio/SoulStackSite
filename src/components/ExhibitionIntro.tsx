@@ -129,7 +129,8 @@ export function ExhibitionSpecs({ show }: { show: Exhibition }) {
   const { updateContent } = useAdmin();
 
   // Every print in a show carries the same size list, so read it off the first.
-  const sizes = show.prints[0]?.sizes ?? [];
+  // Shown largest first (A2 / A3), which is not the order they're priced in.
+  const sizes = [...(show.prints[0]?.sizes ?? [])].sort((a, b) => b.priceCents - a.priceCents);
 
   return (
     <dl className="mx-auto mt-12 grid max-w-3xl divide-y divide-seafoam/60 border-y border-seafoam/60 bg-gradient-to-r from-transparent via-aqua/8 to-transparent sm:mt-16 sm:grid-cols-3 sm:divide-x sm:divide-y-0">

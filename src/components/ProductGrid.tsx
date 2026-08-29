@@ -19,6 +19,8 @@ interface Props {
   paper?: string;
   /** Edition / certificate line for the show. */
   edition?: string;
+  /** Tile shape for the grid — landscape on exhibition pages. */
+  aspect?: string;
 }
 
 export default function ProductGrid({
@@ -27,6 +29,7 @@ export default function ProductGrid({
   exhibitionSlug,
   paper,
   edition,
+  aspect,
 }: Props) {
   const { isAdmin, updateContent } = useAdmin();
   const [openPrint, setOpenPrint] = useState<Print | null>(null);
@@ -73,6 +76,7 @@ export default function ProductGrid({
           <ProductCard
             key={print.id}
             print={print}
+            aspect={aspect}
             onOpen={() => setOpenPrint(print)}
             manage={showManage}
             onEdit={() => setEditPrint(print)}

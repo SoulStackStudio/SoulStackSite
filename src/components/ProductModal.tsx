@@ -42,12 +42,13 @@ export default function ProductModal({ print, paper, edition, onClose }: Props) 
         className="grid max-h-[90vh] w-full max-w-4xl grid-cols-1 overflow-y-auto rounded-2xl bg-cream shadow-2xl md:grid-cols-2"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="bg-seafoam">
+        <div className="flex items-center justify-center bg-seafoam p-3 sm:p-4">
+          {/* object-contain so landscape and portrait both show in full */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={print.image}
             alt={print.title}
-            className="h-52 w-full object-cover sm:h-64 md:h-full md:min-h-[480px]"
+            className="max-h-[38vh] w-full object-contain md:max-h-[70vh] md:min-h-[420px]"
           />
         </div>
 
@@ -111,7 +112,7 @@ export default function ProductModal({ print, paper, edition, onClose }: Props) 
               Add to Cart{selected ? ` — ${formatPrice(selected.priceCents)}` : ""}
             </button>
             <p className="mt-4 text-center text-xs text-ink/40">
-              Secure checkout by Stripe · Ships ready to frame
+              Secure checkout by Stripe · Flat-packed, shipped unframed
             </p>
           </div>
         </div>

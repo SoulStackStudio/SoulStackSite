@@ -72,6 +72,7 @@ export default async function ExhibitionPage({
             exhibitionSlug={show.slug}
             paper={show.paper}
             edition={show.edition}
+            aspect="3/2"
           />
         </div>
       </section>
