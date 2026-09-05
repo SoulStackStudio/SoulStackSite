@@ -21,6 +21,8 @@ interface Props {
   edition?: string;
   /** Tile shape for the grid — landscape on exhibition pages. */
   aspect?: string;
+  /** "cover" (default) crops to fill; "contain" always shows the whole photo. */
+  fit?: "cover" | "contain";
 }
 
 export default function ProductGrid({
@@ -30,6 +32,7 @@ export default function ProductGrid({
   paper,
   edition,
   aspect,
+  fit,
 }: Props) {
   const { isAdmin, updateContent } = useAdmin();
   const [openPrint, setOpenPrint] = useState<Print | null>(null);
@@ -77,6 +80,7 @@ export default function ProductGrid({
             key={print.id}
             print={print}
             aspect={aspect}
+            fit={fit}
             onOpen={() => setOpenPrint(print)}
             manage={showManage}
             onEdit={() => setEditPrint(print)}

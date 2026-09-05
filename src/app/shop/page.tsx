@@ -16,7 +16,7 @@ export default async function ShopPage() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-16 sm:py-24">
       <ShopHeader shop={content.shop} styles={content.styles} />
-      <ProductGrid prints={content.prints} manage />
+      <ProductGrid prints={content.prints} manage aspect="3/2" fit="contain" />
     </section>
   );
 }

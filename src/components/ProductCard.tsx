@@ -9,6 +9,8 @@ interface Props {
   print: Print;
   /** Tile shape. Exhibition work is landscape; the shop's own prints are portrait. */
   aspect?: string;
+  /** "cover" crops to fill the tile (default); "contain" always shows the whole photo, letterboxed if needed. */
+  fit?: "cover" | "contain";
   onOpen: () => void;
   manage?: boolean;
   onEdit?: () => void;
@@ -19,6 +21,7 @@ interface Props {
 export default function ProductCard({
   print,
   aspect = "4/5",
+  fit = "cover",
   onOpen,
   manage,
   onEdit,
@@ -35,7 +38,9 @@ export default function ProductCard({
           <img
             src={print.image}
             alt={print.title}
-            className="w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            className={`w-full transition duration-500 group-hover:scale-[1.03] ${
+              fit === "contain" ? "object-contain" : "object-cover"
+            }`}
             style={{ aspectRatio: aspect }}
             loading="lazy"
           />

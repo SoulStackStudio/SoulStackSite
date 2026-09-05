@@ -45,7 +45,11 @@ export default async function HomePage() {
             Prints from the Collection
           </h2>
         </div>
-        <ProductGrid prints={(featured.length > 0 ? featured : content.prints).slice(0, 3)} />
+        <ProductGrid
+          prints={(featured.length > 0 ? featured : content.prints).slice(0, 3)}
+          aspect="3/2"
+          fit="contain"
+        />
         <div className="mt-14 text-center">
           <Link
             href="/shop"
