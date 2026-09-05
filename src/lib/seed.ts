@@ -41,7 +41,7 @@ export const defaultContent: SiteContent = {
   },
   about: {
     heading: "Behind the Lens",
-    body: "Born at the water's edge, in the quiet hour when the light softens and the sea holds its breath. Every print is a single, unrepeatable moment — captured once, printed by hand on archival fine-art paper built to last a lifetime.",
+    body: "We're drawn to Nazaré in every mood it offers — the huge days, the glassy ones, the moments in between that nobody else stops to notice. Each print began as a single, unrepeatable moment, kept exactly as it was: signed, checked, and printed by hand on archival fine-art paper made to last a lifetime.\n\nFinding something worth keeping. And making sure it lasts.",
   },
   shop: {
     heading: "The Collection",
