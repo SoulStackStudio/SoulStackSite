@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getContent } from "@/lib/store";
 import ProductGrid from "@/components/ProductGrid";
 import ExhibitionBackdrop from "@/components/ExhibitionBackdrop";
+import ExhibitionCoverEditor from "@/components/ExhibitionCoverEditor";
 import {
   ExhibitionHeader,
   ExhibitionNarrative,
@@ -48,17 +49,7 @@ export default async function ExhibitionPage({
     <>
       <ExhibitionBackdrop />
 
-      {show.coverImage && (
-        <div className="relative h-[38vh] min-h-[240px] w-full overflow-hidden bg-seafoam sm:h-[52vh]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={show.coverImage}
-            alt={show.title}
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cream" />
-        </div>
-      )}
+      <ExhibitionCoverEditor show={show} />
 
       <section className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-16">
         <ExhibitionHeader show={show} />

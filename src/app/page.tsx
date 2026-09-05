@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const content = await getContent();
   const featured = content.prints.filter((p) => p.featured);
-  const shows = content.exhibitions ?? [];
+  const shows = (content.exhibitions ?? []).filter((e) => !e.hidden);
 
   return (
     <>

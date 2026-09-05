@@ -7,8 +7,8 @@ const defaultSizes = [
 ];
 
 const exhibitionSizes = [
-  { label: "A3", priceCents: 15600 },
-  { label: "A2", priceCents: 19500 },
+  { label: "A3", priceCents: 22500, dimensions: "297 × 420mm" },
+  { label: "A2", priceCents: 32500, dimensions: "420 × 594mm" },
 ];
 
 export const defaultContent: SiteContent = {
@@ -41,7 +41,7 @@ export const defaultContent: SiteContent = {
   },
   about: {
     heading: "Behind the Lens",
-    body: "Soul Stack Studio began at the water's edge — chasing the quiet hour when the light softens and the sea holds its breath. Every print in this collection was captured in a single, unrepeatable moment and is produced on archival fine-art paper with pigment inks rated to last a lifetime. Each piece is checked by hand before it ships, so what arrives at your door is exactly what the ocean gave us.",
+    body: "Born at the water's edge, in the quiet hour when the light softens and the sea holds its breath. Every print is a single, unrepeatable moment — captured once, printed by hand on archival fine-art paper built to last a lifetime.",
   },
   shop: {
     heading: "The Collection",
@@ -62,7 +62,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--smoke-on-the-water",
           "title": "Smoke on the Water",
-          "description": "Spray lifting off the back of a wave as the offshore wind catches it, held for the half second it looked like smoke.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -70,7 +70,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--emerald-swirls",
           "title": "Emerald Swirls",
-          "description": "Green water turning over on itself in the shallows, the colour deepening where the light stops reaching.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -78,7 +78,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--wistful",
           "title": "Wistful",
-          "description": "A soft, unhurried afternoon on the sand. The kind of light that makes you stop walking without deciding to.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -86,7 +86,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--canyon-wall",
           "title": "Canyon Wall",
-          "description": "The cliff face standing against the Atlantic, worn into shape by the same water it looks down on.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1439066615861-d1af74d74000?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -94,7 +94,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--the-nebula",
           "title": "The Nebula",
-          "description": "Foam and colour spread across the surface until the sea stopped looking like the sea at all.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -102,7 +102,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--out-of-bounds",
           "title": "Out of Bounds",
-          "description": "The moment a set arrives further out than it should, past every line you thought the ocean kept to.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1468581264429-2548ef9eb732?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -110,7 +110,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--resilience",
           "title": "Resilience",
-          "description": "A wave folding back into itself and reforming. Nothing about the ocean stays broken for long.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -118,7 +118,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--the-red-sentinel",
           "title": "The Red Sentinel",
-          "description": "The light that stands watch over the point, still there through every storm that came through.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1465101162946-4377e57745c3?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -126,7 +126,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--breathe-out",
           "title": "Breathe Out",
-          "description": "The long exhale after the set passes, when the water goes quiet and the horizon settles again.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -134,7 +134,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--the-ocean-s-breathe",
           "title": "The Ocean's Breathe",
-          "description": "The slow rise and fall of open water, photographed on a morning that never quite woke up.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1476673160081-cf065607f449?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -142,7 +142,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--dawn-breaks",
           "title": "Dawn Breaks",
-          "description": "First light coming over the Atlantic, the ten minutes we kept setting an alarm for all winter.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -150,7 +150,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--red-alert",
           "title": "Red Alert",
-          "description": "The sky going hot and low before a winter storm, the whole coast lit in warning colours.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1502933691298-84fc14542831?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -158,7 +158,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--the-shore-dance",
           "title": "The Shore Dance",
-          "description": "Turquoise shallows moving over white sand from above, patterns that never repeat twice.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -166,7 +166,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "the-sea-within-us--the-safe-keepers",
           "title": "The Safe Keepers",
-          "description": "The quiet stretch of coast that holds everything else in place, seen from high above the water.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1533760881669-80db4d7b4c15?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -176,6 +176,7 @@ export const defaultContent: SiteContent = {
     {
       "slug": "souls-of-the-canyon",
       "title": "Souls of the Canyon",
+      "hidden": true,
       "tagline": "Nazare, Portugal - a first year on the cliffs",
       "story": "Soul Stack Studio started with a love of photography, a love of the ocean, and a decision to build a life around the things that make us happy. We are Cassandra and Clive. When we first came to Nazare, we knew the ocean would become a big part of our lives. What we didn't realise was how much the people who spend their lives out there would become part of our story too.\n\nSouls of the Canyon is the story of our first year photographing the big-wave surfers of Nazare. For many months, we stood on those cliffs with our cameras, often in the cold, sometimes waiting for hours for nothing much to happen. And then, almost without warning, everything would change. The ocean would come alive, the waves would build, and the surfers would head out.\n\nWhen we first started photographing Nazare, it was the size and power of the waves that caught our attention. It is hard not to be drawn in by them. But the more time we spent there, the more we found ourselves looking beyond the waves. Slowly, we began to understand that big-wave surfing is about so much more than riding a huge wave. There is an incredible amount of patience, courage and trust involved. You have to know the ocean, respect it, and accept that there will always be things you cannot control.\n\nOur cameras gave us a reason to keep coming back, but they also taught us how much there was still to learn. One of the first things we had to learn was simply how to recognise who we were photographing. From the cliffs, everything happens incredibly quickly. There can be so much water, spray and movement that, at first, it was almost impossible to tell one surfer from another.\n\nSo we started learning the little things. The colour of a board. A wetsuit. A sponsor's logo. Someone's stance. And that was when the photographs started to feel different to us. The more we watched, the more connected we felt to the people we had originally come to simply photograph.\n\nSouls of the Canyon isn't meant to be a perfect record of big-wave surfing, and we certainly don't claim to be the perfect technical surf photographers. We are still learning. We are learning the ocean, learning the light, most of all, learning how to capture something that happens incredibly quickly and from quite a distance.\n\nThese photographs are our perspective, two people standing on the cliffs of Nazare with cameras, trying to capture what we felt, what we saw, and what made us keep coming back. But every image means something to us. Each one is connected to a moment we were there to witness or a feeling we wanted to hold on to.\n\nOver this year, the ocean taught us a lot about patience. It taught us that you cannot force the moment you are waiting for. It is our first year photographing the surfers of Nazare and our first real glimpse into a world that, from the outside, can seem almost impossible to understand.\n\nThank you for being here, and for taking the time to look at our photographs.\n\nWe hope that, somewhere amongst these images, you can feel a little of what we felt standing on those cliffs - the excitement, the nerves, the beauty, the uncertainty, and above all, the incredible human spirit behind the waves.\n\nWith love from Nazare,\nCassandra & Clive\nSoul Stack Studio",
       "paper": "Canson Infinity Platine Fibre Rag 310gsm",
@@ -186,7 +187,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--contours",
           "title": "Contours",
-          "description": "The shape of a wave read like a landscape, every ridge and hollow drawn in moving water.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -194,7 +195,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--chasing-shadows",
           "title": "Chasing Shadows",
-          "description": "Late light across the face of a wave, a rider working the dark side of it towards the shoulder.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1455729552865-3658a5d39692?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -202,7 +203,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--liquid-earth",
           "title": "Liquid Earth",
-          "description": "Water carrying so much sand and light that it stopped behaving like water entirely.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -210,7 +211,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--into-the-trough",
           "title": "Into the Trough",
-          "description": "The drop. The part everyone on the cliff stops talking for.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -218,7 +219,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--fractured",
           "title": "Fractured",
-          "description": "A wave coming apart across its whole length, more spray than shape by the time it reached us.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1498623116890-37e912163d5d?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -226,7 +227,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--wind-drift",
           "title": "Wind Drift",
-          "description": "Offshore wind holding the lip up a fraction longer than it should have stayed.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1531722569936-825d3dd91b15?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -234,7 +235,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--the-mystic-leap",
           "title": "The Mystic Leap",
-          "description": "The committed moment, when there is no version of this where you change your mind.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1520942702018-0862200e6873?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -242,7 +243,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--the-escape",
           "title": "The Escape",
-          "description": "Out ahead of it and running, the whole thing collapsing behind the board.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1530870110042-98b2cb110834?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -250,7 +251,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--the-bowl",
           "title": "The Bowl",
-          "description": "Where the canyon focuses the swell and the wave stands up taller than it has any right to.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1484291470158-b8f8d608850d?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -258,7 +259,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--oblique",
           "title": "Oblique",
-          "description": "Shot down the line from the cliff, the angle that finally makes the scale read.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1552083375-1447ce886485?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -266,7 +267,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--into-the-heart",
           "title": "Into the Heart",
-          "description": "Deep inside the section, the place we spent all winter hoping to be pointed at.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1502691876148-a84978e59af8?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes
@@ -274,7 +275,7 @@ export const defaultContent: SiteContent = {
         {
           "id": "souls-of-the-canyon--marmoris",
           "title": "Marmoris",
-          "description": "The marbled surface left behind after the wave has gone, veined like polished stone.",
+          "description": "",
           "image": "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?q=80&w=1620&h=1080&auto=format&fit=crop",
           "featured": false,
           "sizes": exhibitionSizes

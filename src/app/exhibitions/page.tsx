@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function ExhibitionsPage() {
   const content = await getContent();
-  const shows = content.exhibitions ?? [];
+  const shows = (content.exhibitions ?? []).filter((e) => !e.hidden);
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-16 sm:py-24">

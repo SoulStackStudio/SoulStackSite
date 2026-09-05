@@ -62,9 +62,11 @@ export default function ProductModal({ print, paper, edition, onClose }: Props) 
           </button>
 
           <h2 className="font-display text-3xl font-semibold text-ink">{print.title}</h2>
-          <p className="mt-4 text-sm leading-relaxed text-ink/65">{print.description}</p>
+          {print.description && (
+            <p className="mt-4 text-sm leading-relaxed text-ink/65">{print.description}</p>
+          )}
 
-          {(paper || edition) && (
+          {(paper || edition || selected?.dimensions) && (
             <dl className="mt-6 space-y-1.5 border-t border-seafoam pt-5 text-xs text-ink/55">
               {paper && (
                 <div className="flex gap-2">
@@ -76,6 +78,12 @@ export default function ProductModal({ print, paper, edition, onClose }: Props) 
                 <div className="flex gap-2">
                   <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Edition</dt>
                   <dd>{edition}</dd>
+                </div>
+              )}
+              {selected?.dimensions && (
+                <div className="flex gap-2">
+                  <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Size</dt>
+                  <dd>{selected.dimensions} full sheet, border included</dd>
                 </div>
               )}
             </dl>

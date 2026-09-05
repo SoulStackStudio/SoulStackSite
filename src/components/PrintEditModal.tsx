@@ -18,6 +18,7 @@ interface Props {
 interface SizeDraft {
   label: string;
   price: string; // dollars as typed, e.g. "45"
+  dimensions: string; // e.g. "420 × 594mm" — full sheet size, border included
 }
 
 function slugify(title: string): string {
@@ -37,16 +38,20 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
   const [image, setImage] = useState(print?.image ?? "");
   const [featured, setFeatured] = useState(print?.featured ?? false);
   const [sizes, setSizes] = useState<SizeDraft[]>(
-    print?.sizes.map((s) => ({ label: s.label, price: (s.priceCents / 100).toString() })) ??
+    print?.sizes.map((s) => ({
+      label: s.label,
+      price: (s.priceCents / 100).toString(),
+      dimensions: s.dimensions ?? "",
+    })) ??
       (exhibitionSlug
         ? [
-            { label: "A3", price: "156" },
-            { label: "A2", price: "195" },
+            { label: "A3", price: "225", dimensions: "297 × 420mm" },
+            { label: "A2", price: "325", dimensions: "420 × 594mm" },
           ]
         : [
-            { label: "20×25 cm", price: "45" },
-            { label: "30×40 cm", price: "75" },
-            { label: "50×75 cm", price: "120" },
+            { label: "20×25 cm", price: "45", dimensions: "" },
+            { label: "30×40 cm", price: "75", dimensions: "" },
+            { label: "50×75 cm", price: "120", dimensions: "" },
           ])
   );
   const [error, setError] = useState<string | null>(null);
@@ -59,13 +64,17 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
     setError(null);
     if (!title.trim()) return setError("Title is required");
     if (!image.trim()) return setError("Add an image (URL or upload)");
-    const parsedSizes: { label: string; priceCents: number }[] = [];
+    const parsedSizes: { label: string; priceCents: number; dimensions?: string }[] = [];
     for (const s of sizes) {
       const price = parseFloat(s.price);
       if (!s.label.trim() || isNaN(price) || price < 0.5) {
         return setError("Every size needs a label and a price of at least €0.50");
       }
-      parsedSizes.push({ label: s.label.trim(), priceCents: Math.round(price * 100) });
+      parsedSizes.push({
+        label: s.label.trim(),
+        priceCents: Math.round(price * 100),
+        dimensions: s.dimensions.trim() || undefined,
+      });
     }
     if (parsedSizes.length === 0) return setError("Add at least one size");
 
@@ -157,36 +166,44 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
             </label>
             <div className="space-y-2">
               {sizes.map((s, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <input
-                    value={s.label}
-                    onChange={(e) => setSize(i, { label: e.target.value })}
-                    placeholder="e.g. 30×40 cm"
-                    className={inputClass}
-                  />
-                  <div className="relative w-32">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/40">
-                      €
-                    </span>
+                <div key={i} className="rounded-lg border border-seafoam/60 p-2">
+                  <div className="flex items-center gap-2">
                     <input
-                      value={s.price}
-                      onChange={(e) => setSize(i, { price: e.target.value })}
-                      inputMode="decimal"
-                      className={`${inputClass} pl-7`}
+                      value={s.label}
+                      onChange={(e) => setSize(i, { label: e.target.value })}
+                      placeholder="e.g. 30×40 cm"
+                      className={inputClass}
                     />
+                    <div className="relative w-32">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-ink/40">
+                        €
+                      </span>
+                      <input
+                        value={s.price}
+                        onChange={(e) => setSize(i, { price: e.target.value })}
+                        inputMode="decimal"
+                        className={`${inputClass} pl-7`}
+                      />
+                    </div>
+                    <button
+                      onClick={() => setSizes((prev) => prev.filter((_, idx) => idx !== i))}
+                      className="shrink-0 text-ink/35 hover:text-red-500"
+                      title="Remove size"
+                    >
+                      <Trash2 size={16} />
+                    </button>
                   </div>
-                  <button
-                    onClick={() => setSizes((prev) => prev.filter((_, idx) => idx !== i))}
-                    className="shrink-0 text-ink/35 hover:text-red-500"
-                    title="Remove size"
-                  >
-                    <Trash2 size={16} />
-                  </button>
+                  <input
+                    value={s.dimensions}
+                    onChange={(e) => setSize(i, { dimensions: e.target.value })}
+                    placeholder="Full sheet size, border included — e.g. 420 × 594mm (optional)"
+                    className={`${inputClass} mt-2`}
+                  />
                 </div>
               ))}
             </div>
             <button
-              onClick={() => setSizes((prev) => [...prev, { label: "", price: "" }])}
+              onClick={() => setSizes((prev) => [...prev, { label: "", price: "", dimensions: "" }])}
               className="mt-2 flex items-center gap-1 text-sm font-medium text-brand hover:text-brand-deep"
             >
               <Plus size={15} /> Add size

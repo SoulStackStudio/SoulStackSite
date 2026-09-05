@@ -1,6 +1,8 @@
 export interface PrintSize {
   label: string;
   priceCents: number;
+  /** Full sheet size, border included, e.g. "420 × 594mm" — shown so buyers aren't confused about what "A2"/"A3" means. */
+  dimensions?: string;
 }
 
 export interface Print {
@@ -47,6 +49,8 @@ export interface Exhibition {
   /** the longer 'Fine Art Photography Prints' copy, shown below the grid */
   printInfo: string;
   coverImage: string;
+  /** true = keep the folder live but leave it off the homepage/exhibitions listing */
+  hidden?: boolean;
   prints: Print[];
 }
 
