@@ -3,6 +3,7 @@
 import { Pencil, Trash2, ArrowUp, ArrowDown, Star } from "lucide-react";
 import type { Print } from "@/lib/types";
 import { formatPrice } from "@/lib/types";
+import Watermark from "./Watermark";
 
 interface Props {
   print: Print;
@@ -29,7 +30,7 @@ export default function ProductCard({
   return (
     <div className="group relative">
       <button onClick={onOpen} className="block w-full text-left">
-        <div className="overflow-hidden rounded-xl bg-seafoam">
+        <div className="relative overflow-hidden rounded-xl bg-seafoam">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={print.image}
@@ -38,6 +39,7 @@ export default function ProductCard({
             style={{ aspectRatio: aspect }}
             loading="lazy"
           />
+          <Watermark />
         </div>
         <div className="mt-4 flex items-baseline justify-between">
           <h3 className="font-display text-xl font-semibold text-ink">{print.title}</h3>

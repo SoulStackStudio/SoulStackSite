@@ -22,13 +22,30 @@ export default function Navbar() {
   const { count, setOpen } = useCart();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  // With exactly one visible exhibition, the nav link skips the listing page
+  // and goes straight there; it reverts to "/exhibitions" on its own once a
+  // second show is unhidden.
+  const [exhibitionsHref, setExhibitionsHref] = useState("/exhibitions");
+
+  useEffect(() => {
+    fetch("/api/content")
+      .then((r) => r.json())
+      .then((d) => {
+        const visible = (d.exhibitions ?? []).filter((e: { hidden?: boolean }) => !e.hidden);
+        if (visible.length === 1) setExhibitionsHref(`/exhibitions/${visible[0].slug}`);
+      })
+      .catch(() => {});
+  }, []);
 
   // Never leave the menu hanging open across a navigation.
   useEffect(() => setMenuOpen(false), [pathname]);
 
-  // An exhibition page should still light up the Exhibitions link.
+  // An exhibition page should still light up the Exhibitions link (isCurrent
+  // is always called with the canonical "/exhibitions", not hrefFor's result).
   const isCurrent = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  const hrefFor = (href: string) => (href === "/exhibitions" ? exhibitionsHref : href);
 
   const linkClass = (href: string) =>
     `text-sm tracking-widest uppercase transition ${
@@ -51,7 +68,11 @@ export default function Navbar() {
           <nav className="flex items-center gap-4 sm:gap-8">
             {/* Inline from sm up; on phones these live in the panel below. */}
             {LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className={`hidden sm:inline ${linkClass(l.href)}`}>
+              <Link
+                key={l.href}
+                href={hrefFor(l.href)}
+                className={`hidden sm:inline ${linkClass(l.href)}`}
+              >
                 {l.label}
               </Link>
             ))}
@@ -116,7 +137,7 @@ export default function Navbar() {
               {LINKS.map((l) => (
                 <Link
                   key={l.href}
-                  href={l.href}
+                  href={hrefFor(l.href)}
                   onClick={() => setMenuOpen(false)}
                   className={`border-b border-seafoam/40 py-3.5 last:border-0 ${linkClass(l.href)}`}
                 >
