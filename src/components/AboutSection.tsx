@@ -36,7 +36,7 @@ export default function AboutSection({ content }: { content: SiteContent }) {
               styles: { ...(c.styles ?? {}), "about.body": st },
             }))
           }
-          className="mt-6 text-base leading-relaxed text-ink/70 sm:text-lg"
+          className="mt-6 whitespace-pre-line text-base leading-relaxed text-ink/70 sm:text-lg"
         />
       </div>
     </section>

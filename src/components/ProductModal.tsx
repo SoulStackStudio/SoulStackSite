@@ -68,24 +68,30 @@ export default function ProductModal({ print, paper, edition, onClose }: Props) 
             <p className="mt-4 text-sm leading-relaxed text-ink/65">{print.description}</p>
           )}
 
-          {(paper || edition || selected?.dimensions) && (
+          {(paper || edition || selected?.imageSize || selected?.dimensions) && (
             <dl className="mt-6 space-y-1.5 border-t border-seafoam pt-5 text-xs text-ink/55">
               {paper && (
                 <div className="flex gap-2">
-                  <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Paper</dt>
+                  <dt className="w-24 shrink-0 uppercase tracking-widest text-ink/40">Paper</dt>
                   <dd>{paper}</dd>
                 </div>
               )}
               {edition && (
                 <div className="flex gap-2">
-                  <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Edition</dt>
+                  <dt className="w-24 shrink-0 uppercase tracking-widest text-ink/40">Edition</dt>
                   <dd>{edition}</dd>
+                </div>
+              )}
+              {selected?.imageSize && (
+                <div className="flex gap-2">
+                  <dt className="w-24 shrink-0 uppercase tracking-widest text-ink/40">Image size</dt>
+                  <dd>{selected.imageSize}</dd>
                 </div>
               )}
               {selected?.dimensions && (
                 <div className="flex gap-2">
-                  <dt className="w-20 shrink-0 uppercase tracking-widest text-ink/40">Size</dt>
-                  <dd>{selected.dimensions} full sheet, border included</dd>
+                  <dt className="w-24 shrink-0 uppercase tracking-widest text-ink/40">Paper size</dt>
+                  <dd>{selected.dimensions}</dd>
                 </div>
               )}
             </dl>

@@ -7,8 +7,8 @@ const defaultSizes = [
 ];
 
 const exhibitionSizes = [
-  { label: "A3", priceCents: 22500, dimensions: "297 × 420mm" },
-  { label: "A2", priceCents: 32500, dimensions: "420 × 594mm" },
+  { label: "A3", priceCents: 22500, imageSize: "237 × 355mm", dimensions: "297 × 420mm" },
+  { label: "A2", priceCents: 32500, imageSize: "340 × 510mm", dimensions: "420 × 594mm" },
 ];
 
 export const defaultContent: SiteContent = {
@@ -41,7 +41,7 @@ export const defaultContent: SiteContent = {
   },
   about: {
     heading: "Behind the Lens",
-    body: "We're drawn to Nazaré in every mood it offers — the huge days, the glassy ones, the moments in between that nobody else stops to notice. Each print began as a single, unrepeatable moment, kept exactly as it was: signed, checked, and printed by hand on archival fine-art paper made to last a lifetime.\n\nFinding something worth keeping. And making sure it lasts.",
+    body: "From quiet mornings along the coast to the days when Nazaré turns into something else entirely, we're drawn to the ocean in every mood it offers — the huge days, the glassy ones, the messy ones, and the moments in between that nobody else stops to notice.\n\nWe're not chasing a perfect ocean. It isn't one — it's powerful, unpredictable and rough around the edges, and that's exactly what we love about it. Every print here is a single, unrepeatable moment, kept exactly as it was: salt in the air, wind on your face, the sound of the water.\n\nEach one is signed, checked and printed by hand on archival fine-art paper made to last a lifetime.\n\nFinding something worth keeping. And making sure it lasts.",
   },
   shop: {
     heading: "The Collection",

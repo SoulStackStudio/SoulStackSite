@@ -67,7 +67,7 @@ export default function Hero({ content }: { content: SiteContent }) {
       ))}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/50 via-ink/30 to-ink/60" />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 py-24 text-center text-cream">
+      <div className="relative z-10 mx-auto max-w-4xl px-6 py-24 text-center text-cream">
         <EditableText
           as="h1"
           value={content.hero.headline}
@@ -79,7 +79,9 @@ export default function Hero({ content }: { content: SiteContent }) {
               styles: { ...(c.styles ?? {}), "hero.headline": st },
             }))
           }
-          className="font-display text-4xl font-semibold leading-tight sm:text-6xl"
+          // Fluid, viewport-driven size (rather than a fixed breakpoint jump) so
+          // the headline stays on one line at any width instead of wrapping.
+          className="whitespace-nowrap font-display text-[clamp(1.4rem,4.8vw,3.25rem)] font-semibold leading-tight"
         />
         <EditableText
           as="p"

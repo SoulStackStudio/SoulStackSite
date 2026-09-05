@@ -1,7 +1,9 @@
 export interface PrintSize {
   label: string;
   priceCents: number;
-  /** Full sheet size, border included, e.g. "420 × 594mm" — shown so buyers aren't confused about what "A2"/"A3" means. */
+  /** Just the printed photo, e.g. "340 × 510mm" — smaller than the paper size below. */
+  imageSize?: string;
+  /** Full sheet size, border included, e.g. "420 × 594mm" — what "A2"/"A3" actually refers to. */
   dimensions?: string;
 }
 

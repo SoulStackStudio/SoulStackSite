@@ -18,6 +18,7 @@ interface Props {
 interface SizeDraft {
   label: string;
   price: string; // dollars as typed, e.g. "45"
+  imageSize: string; // e.g. "340 × 510mm" — just the printed photo
   dimensions: string; // e.g. "420 × 594mm" — full sheet size, border included
 }
 
@@ -41,17 +42,18 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
     print?.sizes.map((s) => ({
       label: s.label,
       price: (s.priceCents / 100).toString(),
+      imageSize: s.imageSize ?? "",
       dimensions: s.dimensions ?? "",
     })) ??
       (exhibitionSlug
         ? [
-            { label: "A3", price: "225", dimensions: "297 × 420mm" },
-            { label: "A2", price: "325", dimensions: "420 × 594mm" },
+            { label: "A3", price: "225", imageSize: "237 × 355mm", dimensions: "297 × 420mm" },
+            { label: "A2", price: "325", imageSize: "340 × 510mm", dimensions: "420 × 594mm" },
           ]
         : [
-            { label: "20×25 cm", price: "45", dimensions: "" },
-            { label: "30×40 cm", price: "75", dimensions: "" },
-            { label: "50×75 cm", price: "120", dimensions: "" },
+            { label: "20×25 cm", price: "45", imageSize: "", dimensions: "" },
+            { label: "30×40 cm", price: "75", imageSize: "", dimensions: "" },
+            { label: "50×75 cm", price: "120", imageSize: "", dimensions: "" },
           ])
   );
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +66,7 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
     setError(null);
     if (!title.trim()) return setError("Title is required");
     if (!image.trim()) return setError("Add an image (URL or upload)");
-    const parsedSizes: { label: string; priceCents: number; dimensions?: string }[] = [];
+    const parsedSizes: { label: string; priceCents: number; imageSize?: string; dimensions?: string }[] = [];
     for (const s of sizes) {
       const price = parseFloat(s.price);
       if (!s.label.trim() || isNaN(price) || price < 0.5) {
@@ -73,6 +75,7 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
       parsedSizes.push({
         label: s.label.trim(),
         priceCents: Math.round(price * 100),
+        imageSize: s.imageSize.trim() || undefined,
         dimensions: s.dimensions.trim() || undefined,
       });
     }
@@ -193,17 +196,27 @@ export default function PrintEditModal({ print, exhibitionSlug, onClose }: Props
                       <Trash2 size={16} />
                     </button>
                   </div>
-                  <input
-                    value={s.dimensions}
-                    onChange={(e) => setSize(i, { dimensions: e.target.value })}
-                    placeholder="Full sheet size, border included — e.g. 420 × 594mm (optional)"
-                    className={`${inputClass} mt-2`}
-                  />
+                  <div className="mt-2 flex gap-2">
+                    <input
+                      value={s.imageSize}
+                      onChange={(e) => setSize(i, { imageSize: e.target.value })}
+                      placeholder="Image size — e.g. 340 × 510mm (optional)"
+                      className={inputClass}
+                    />
+                    <input
+                      value={s.dimensions}
+                      onChange={(e) => setSize(i, { dimensions: e.target.value })}
+                      placeholder="Paper size — e.g. 420 × 594mm (optional)"
+                      className={inputClass}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
             <button
-              onClick={() => setSizes((prev) => [...prev, { label: "", price: "", dimensions: "" }])}
+              onClick={() =>
+                setSizes((prev) => [...prev, { label: "", price: "", imageSize: "", dimensions: "" }])
+              }
               className="mt-2 flex items-center gap-1 text-sm font-medium text-brand hover:text-brand-deep"
             >
               <Plus size={15} /> Add size
