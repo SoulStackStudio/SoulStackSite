@@ -69,6 +69,13 @@ export async function POST(req: NextRequest) {
           ? [`${origin}${print.image}`]
           : [];
 
+    // Stripe rejects an explicit empty string here ("cannot be unset") — main
+    // shop prints can have a blank description (the field is optional), so
+    // only send it when there's actually something to show.
+    const description = (
+      exhibition ? `${exhibition.paper}. ${exhibition.edition}.` : print.description
+    ).slice(0, 300);
+
     lineItems.push({
       quantity: qty,
       price_data: {
@@ -78,10 +85,7 @@ export async function POST(req: NextRequest) {
           name: exhibition
             ? `${print.title} — ${size.label} · ${exhibition.title}`
             : `${print.title} — ${size.label} print`,
-          description: (exhibition
-            ? `${exhibition.paper}. ${exhibition.edition}.`
-            : print.description
-          ).slice(0, 300),
+          ...(description ? { description } : {}),
           ...(images.length ? { images } : {}),
         },
       },
