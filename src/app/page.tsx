@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
 import ProductGrid from "@/components/ProductGrid";
 import ExhibitionCards from "@/components/ExhibitionCards";
+import ReviewsSection from "@/components/ReviewsSection";
 
 export const dynamic = "force-dynamic";
 
@@ -59,6 +60,8 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      <ReviewsSection reviews={content.reviews ?? []} />
     </>
   );
 }

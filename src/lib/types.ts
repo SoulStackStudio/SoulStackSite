@@ -30,6 +30,16 @@ export interface ContactItem {
   value: string;
 }
 
+export interface Review {
+  id: string;
+  name: string;
+  /** e.g. "Bought a signed A2 print" or "Saw the collection in Nazaré" */
+  context: string;
+  quote: string;
+  /** 1–5, optional */
+  rating?: number;
+}
+
 export interface TextStyle {
   /** font size as % of the design default (100 = unchanged) */
   size?: number;
@@ -83,6 +93,8 @@ export interface SiteContent {
   /** optional so older saved content keeps working — each show is its own "folder" */
   exhibitions?: Exhibition[];
   prints: Print[];
+  /** curated testimonials — admin-managed, not tied to Stripe orders */
+  reviews?: Review[];
 }
 
 export function textStyleCss(style?: TextStyle): React.CSSProperties {

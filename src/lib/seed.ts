@@ -345,4 +345,22 @@ export const defaultContent: SiteContent = {
       sizes: defaultSizes,
     },
   ],
+  reviews: [
+    {
+      id: "review-1",
+      name: "Isabel M.",
+      context: "Bought a signed A2 print",
+      quote:
+        "The print arrived beautifully packaged and looks even better in person than online. It's the first thing people notice when they walk in.",
+      rating: 5,
+    },
+    {
+      id: "review-2",
+      name: "Tomás R.",
+      context: "Saw the collection in Nazaré",
+      quote:
+        "Saw these hanging in person before I bought anything — the detail in the water is incredible up close. Ended up going home with two.",
+      rating: 5,
+    },
+  ],
 };
