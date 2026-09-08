@@ -38,6 +38,8 @@ export interface Review {
   quote: string;
   /** 1–5, optional */
   rating?: number;
+  /** false = submitted via the public form, awaiting admin approval. Undefined/true = visible. */
+  approved?: boolean;
 }
 
 export interface TextStyle {

@@ -39,6 +39,7 @@ export default function ReviewEditModal({ review, onClose }: Props) {
           context: context.trim(),
           quote: quote.trim(),
           rating,
+          approved: true,
         };
         if (review) return list.map((r) => (r.id === review.id ? patch : r));
         return [...list, patch];
