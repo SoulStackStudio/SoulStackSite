@@ -268,6 +268,7 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
   const { isAdmin, updateContent } = useAdmin();
   const [editing, setEditing] = useState<Review | null>(null);
   const [adding, setAdding] = useState(false);
+  const [tab, setTab] = useState<"reviews" | "write">("reviews");
 
   const approved = reviews.filter((r) => r.approved !== false);
   const pending = reviews.filter((r) => r.approved === false);
@@ -343,22 +344,49 @@ export default function ReviewsSection({ reviews }: { reviews: Review[] }) {
           </div>
         )}
 
-        {approved.length > 0 && (
-          <div className="mb-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {approved.map((review) => (
-              <ReviewCard
-                key={review.id}
-                review={review}
-                manage={isAdmin}
-                onEdit={() => setEditing(review)}
-                onDelete={() => remove(review)}
-                onMove={(dir) => move(review.id, dir)}
-              />
-            ))}
-          </div>
-        )}
+        <div className="mb-10 flex justify-center gap-2">
+          <button
+            onClick={() => setTab("reviews")}
+            className={`rounded-full px-5 py-2 text-sm font-medium tracking-wide transition ${
+              tab === "reviews"
+                ? "bg-brand text-cream"
+                : "border border-seafoam bg-cream text-ink/60 hover:border-turquoise"
+            }`}
+          >
+            Reviews{approved.length > 0 ? ` (${approved.length})` : ""}
+          </button>
+          <button
+            onClick={() => setTab("write")}
+            className={`rounded-full px-5 py-2 text-sm font-medium tracking-wide transition ${
+              tab === "write"
+                ? "bg-brand text-cream"
+                : "border border-seafoam bg-cream text-ink/60 hover:border-turquoise"
+            }`}
+          >
+            Write a Review
+          </button>
+        </div>
 
-        <SubmitReviewForm />
+        {tab === "reviews" ? (
+          approved.length > 0 ? (
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {approved.map((review) => (
+                <ReviewCard
+                  key={review.id}
+                  review={review}
+                  manage={isAdmin}
+                  onEdit={() => setEditing(review)}
+                  onDelete={() => remove(review)}
+                  onMove={(dir) => move(review.id, dir)}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-ink/50">No reviews yet — be the first to share yours.</p>
+          )
+        ) : (
+          <SubmitReviewForm />
+        )}
       </div>
 
       {(editing || adding) && (
